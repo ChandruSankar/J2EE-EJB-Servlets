@@ -1,8 +1,3 @@
-# J2EE-EJB-Servlets
-This repository contains the source code of all the Servlets, EJBs created during the J2EE Training
----
-## **Notes:**
-
 J2SE->Core->void main
 J2ME->Micro
 J2EE->Enterprise->Container[Service which hosts web apps]
@@ -19,41 +14,48 @@ war->Web archive(Rest,SOAP,JSP,Servlets,Restlets,EJB)
 ear->Enterprise archive(EJB)
 
 Standalone and Domain(Calling a ejb will have considerable changes(JNDI))
+---
 
 
+```java 
 package co.cls.mods;
-
 public class Cars {
-	private int cid;
 
-	public int getCid() {
-		return cid;
-	}
+    private int cid;
 
-	public void setCid(int cid) {
-		this.cid = cid;
-	}
+    public int getCid() {
+        return cid;
+    }
 
-	public String getCname() {
-		return cname;
-	}
+    public void setCid(int cid) {
+        this.cid = cid;
+    }
 
-	public void setCname(String cname) {
-		this.cname = cname;
-	}
+    public String getCname() {
+        return cname;
+    }
 
-	public String getCbrand() {
-		return cbrand;
-	}
+    public void setCname(String cname) {
+        this.cname = cname;
+    }
 
-	public void setCbrand(String cbrand) {
-		this.cbrand = cbrand;
-	}
+    public String getCbrand() {
+        return cbrand;
+    }
 
-	private String cname;
-	private String cbrand;
-}
-/////////
+    public void setCbrand(String cbrand) {
+        this.cbrand = cbrand;
+    }
+
+    private String cname;
+    private String cbrand;
+
+} 
+```
+
+# Next Program
+
+```java
 package co.cls.st;
 
 import java.io.IOException;
@@ -70,7 +72,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/BServe")
 public class BServe extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -80,45 +82,50 @@ public class BServe extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-		out.println("<h1 style=\"background-color:red;color:yellow\">Second Servlet Running</h1>");
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out=response.getWriter();
+        out.println("<h1 style=\"background-color:red;color:yellow\">Second Servlet Running</h1>");
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 
-}
-///////
+```
+
+```java
 package co.cls.mods;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListCars {
-		public List<Cars> retCList(){
-			List<Cars> lc=new ArrayList<Cars>();
-			int[] arr1= {101,201,301,401,501};
-			String[] arr2= {"Octavio","Thar","Empala","Camry","ECclass"};
-			String[] arr3= {"Skoda","Jeep","Ambassador","Toyota","Mercedes"};
-			for (int i = 0; i < arr3.length; i++) {
-				Cars c=new Cars();
-				c.setCid(arr1[i]);
-				c.setCname(arr2[i]);
-				c.setCbrand(arr3[i]);
-				lc.add(c);
-			}
-			return lc;
-		}
+        public List<Cars> retCList(){
+            List<Cars> lc=new ArrayList<Cars>();
+            int[] arr1= {101,201,301,401,501};
+            String[] arr2= {"Octavio","Thar","Empala","Camry","ECclass"};
+            String[] arr3= {"Skoda","Jeep","Ambassador","Toyota","Mercedes"};
+            for (int i = 0; i < arr3.length; i++) {
+                Cars c=new Cars();
+                c.setCid(arr1[i]);
+                c.setCname(arr2[i]);
+                c.setCbrand(arr3[i]);
+                lc.add(c);
+            }
+            return lc;
+        }
 }
-///////
+
+```
+
+```java
+
 package co.cls.st;
 
 import java.io.IOException;
@@ -140,7 +147,7 @@ import co.cls.mods.ListCars;
  */
 @WebServlet("/Index")
 public class Index extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -150,33 +157,37 @@ public class Index extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-		List<Cars> lc=null;
-		ListCars lcObj=new ListCars();
-		lc=lcObj.retCList();
-		String disp="<center><table border=1><thead><tr><th>Car ID</th><th>Car Name</th><th>Car Brand</th></tr></thead><tbody>";
-		for(Cars c:lc) {
-			disp+="<tr><td>"+c.getCid()+"</td><td>"+c.getCname()+"</td><td>"+c.getCbrand()+"</td></tr>";
-		}
-		disp+="</tbody></table><center>";
-		out.println("<center><h1>Welcome to car show room we have following cars for display</h1></center><br/><hr/><br/>");
-		out.println(disp);
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out=response.getWriter();
+        List<Cars> lc=null;
+        ListCars lcObj=new ListCars();
+        lc=lcObj.retCList();
+        String disp="<center><table border=1><thead><tr><th>Car ID</th><th>Car Name</th><th>Car Brand</th></tr></thead><tbody>";
+        for(Cars c:lc) {
+            disp+="<tr><td>"+c.getCid()+"</td><td>"+c.getCname()+"</td><td>"+c.getCbrand()+"</td></tr>";
+        }
+        disp+="</tbody></table><center>";
+        out.println("<center><h1>Welcome to car show room we have following cars for display</h1></center><br/><hr/><br/>");
+        out.println(disp);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
-}
-////////
+} 
+```
+
+---
+
+```java
 package co.cls.st;
 
 import java.io.IOException;
@@ -198,7 +209,7 @@ import co.cls.mods.ListCars;
  */
 @WebServlet("/Index")
 public class Index extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -208,35 +219,42 @@ public class Index extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-		List<Cars> lc=null;
-		ListCars lcObj=new ListCars();
-		lc=lcObj.retCList();
-		String disp="<center><table border=1 style=\"background-color:black;color:yellow;\"><thead><tr><th>Car ID</th><th>Car Name</th><th>Car Brand</th></tr></thead><tbody>";
-		for(Cars c:lc) {
-			disp+="<tr><td>"+c.getCid()+"</td><td>"+c.getCname()+"</td><td>"+c.getCbrand()+"</td></tr>";
-		}
-		disp+="</tbody></table><center>";
-		out.println("<center><h1>Welcome to car show room we have following cars for display</h1></center><br/><hr/><br/>");
-		out.println(disp);
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out=response.getWriter();
+        List<Cars> lc=null;
+        ListCars lcObj=new ListCars();
+        lc=lcObj.retCList();
+        String disp="<center><table border=1 style=\"background-color:black;color:yellow;\"><thead><tr><th>Car ID</th><th>Car Name</th><th>Car Brand</th></tr></thead><tbody>";
+        for(Cars c:lc) {
+            disp+="<tr><td>"+c.getCid()+"</td><td>"+c.getCname()+"</td><td>"+c.getCbrand()+"</td></tr>";
+        }
+        disp+="</tbody></table><center>";
+        out.println("<center><h1>Welcome to car show room we have following cars for display</h1></center><br/><hr/><br/>");
+        out.println(disp);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }
-/////
+```
+
+-----
+## Snippet to set context type
+```java
 response.addHeader("content-type", "text/html");
-/////
+```
+-----
+
+```java
 package co.cls.st;
 
 import java.io.IOException;
@@ -257,7 +275,7 @@ import co.cls.mods.ListCars;
  */
 @WebServlet("/DetServe")
 public class DetServe extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -267,59 +285,67 @@ public class DetServe extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.addHeader("content-type", "text/html");
-		PrintWriter out=response.getWriter();
-		out.println("Welcome to selection");
-		List<Cars> lc=null;
-		ListCars lcObj=new ListCars();
-		lc=lcObj.retCList();
-		String op="<form><select name=sel>";
-		for(Cars c:lc) {
-			op+="<option value="+c.getCid()+">"+c.getCid()+"</option>";
-		}
-		op+="</select><input type=submit value=Get /></form>";
-		out.println(op);
-		if(request.getParameter("sel")!=null) {
-//			out.println("<br/>Selected Car Id is "+request.getParameter("sel"));
-			String cont="<h2>";
-			for(Cars c:lc) {
-				if(c.getCid()==Integer.parseInt(request.getParameter("sel")))
-				cont+="Name:"+c.getCname()+"<br/>Brand:"+c.getCbrand();
-			}
-			cont+="</h2>";
-			out.println(cont);
-		}
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.addHeader("content-type", "text/html");
+        PrintWriter out=response.getWriter();
+        out.println("Welcome to selection");
+        List<Cars> lc=null;
+        ListCars lcObj=new ListCars();
+        lc=lcObj.retCList();
+        String op="<form><select name=sel>";
+        for(Cars c:lc) {
+            op+="<option value="+c.getCid()+">"+c.getCid()+"</option>";
+        }
+        op+="</select><input type=submit value=Get /></form>";
+        out.println(op);
+        if(request.getParameter("sel")!=null) {
+            String cont="<h2>";
+            for(Cars c:lc) {
+                if(c.getCid()==Integer.parseInt(request.getParameter("sel")))
+                cont+="Name:"+c.getCname()+"<br/>Brand:"+c.getCbrand();
+            }
+            cont+="</h2>";
+            out.println(cont);
+        }
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }
-/////////index.html//////
+
+```
+
+
+## Index.html
+```html
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Home page</title>
+    <meta charset="ISO-8859-1">
+    <title>Home page</title>
 </head>
 <body>
-<table>
-<tr><td><a href="./BServe">First Servlet</a></td>
-<td><a href="./Index">Second Servlet</a></td>
-<td><a href="./DetServe">Third Servlet</a></td></tr>
-</table>
+    <table>
+        <tr>
+            <td><a href="./BServe">First Servlet</a></td>
+            <td><a href="./Index">Second Servlet</a></td>
+            <td><a href="./DetServe">Third Servlet</a></td>
+        </tr>
+    </table>
 </body>
 </html>
-/////
+```
+
+```java
 package co.cls.st;
 
 import java.io.IOException;
@@ -340,7 +366,7 @@ import co.cls.mods.ListCars;
  */
 @WebServlet("/DetServe")
 public class DetServe extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -350,44 +376,46 @@ public class DetServe extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.addHeader("content-type", "text/html");
-		PrintWriter out=response.getWriter();
-		out.println("Welcome to selection");
-		List<Cars> lc=null;
-		ListCars lcObj=new ListCars();
-		lc=lcObj.retCList();
-		String op="<form><select name=sel>";
-		for(Cars c:lc) {
-			op+="<option value="+c.getCid()+">"+c.getCid()+"</option>";
-		}
-		op+="</select><input type=submit value=Get /></form>";
-		out.println(op);
-		if(request.getParameter("sel")!=null) {
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.addHeader("content-type", "text/html");
+        PrintWriter out=response.getWriter();
+        out.println("Welcome to selection");
+        List<Cars> lc=null;
+        ListCars lcObj=new ListCars();
+        lc=lcObj.retCList();
+        String op="<form><select name=sel>";
+        for(Cars c:lc) {
+            op+="<option value="+c.getCid()+">"+c.getCid()+"</option>";
+        }
+        op+="</select><input type=submit value=Get /></form>";
+        out.println(op);
+        if(request.getParameter("sel")!=null) {
 //			out.println("<br/>Selected Car Id is "+request.getParameter("sel"));
-			String cont="<br/><span>Details of the car selected</span><br/><h2>";
-			for(Cars c:lc) {
-				if(c.getCid()==Integer.parseInt(request.getParameter("sel")))
-				cont+="Name:"+c.getCname()+"<br/>Brand:"+c.getCbrand();
-			}
-			cont+="</h2>";
-			out.println(cont);
-		}
-	}
+            String cont="<br/><span>Details of the car selected</span><br/><h2>";
+            for(Cars c:lc) {
+                if(c.getCid()==Integer.parseInt(request.getParameter("sel")))
+                cont+="Name:"+c.getCname()+"<br/>Brand:"+c.getCbrand();
+            }
+            cont+="</h2>";
+            out.println(cont);
+        }
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }
-///////////
+```
+
+```java
 package co.cls.st;
 
 import java.io.IOException;
@@ -408,7 +436,7 @@ import co.cls.mods.ListCars;
  */
 @WebServlet("/CarForm")
 public class CarForm extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -418,45 +446,49 @@ public class CarForm extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.addHeader("content-type", "text/html");
-		PrintWriter out=response.getWriter();
-		ListCars lca=new ListCars();
-		List<Cars> lc=lca.retCList();
-		String op="<center><form><table><tr><td>Car Id</td><td><input type=text name=cid /></td></tr>";
-		op+="<tr><td>Car Name</td><td><input type=text name=cname /></td></tr>";
-		op+="<tr><td>Car Brand</td><td><input type=text name=cbrand /></td></tr>";
-		op+="<tr><td><input type=submit value=Send /></td><td><input type=reset value=Cancel /></td></tr></table></form></center>";
-		if(request.getParameter("cname")!=null) {
-			int a=Integer.parseInt(request.getParameter("cid"));
-			String b=request.getParameter("cname");
-			String c=request.getParameter("cbrand");
-			Cars cc=new Cars();
-			cc.setCid(a);
-			cc.setCname(b);
-			cc.setCbrand(c);
-			lc.add(cc);
-			out.println("<ul>");
-			for(Cars ca:lc) {
-				out.println("<li>"+ca.getCid()+"&nbsp;"+ca.getCname()+"&nbsp;"+ca.getCbrand()+"</li>");
-			}
-			out.println("</ul>");
-		}
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.addHeader("content-type", "text/html");
+        PrintWriter out=response.getWriter();
+        ListCars lca=new ListCars();
+        List<Cars> lc=lca.retCList();
+        String op="<center><form><table><tr><td>Car Id</td><td><input type=text name=cid /></td></tr>";
+        op+="<tr><td>Car Name</td><td><input type=text name=cname /></td></tr>";
+        op+="<tr><td>Car Brand</td><td><input type=text name=cbrand /></td></tr>";
+        op+="<tr><td><input type=submit value=Send /></td><td><input type=reset value=Cancel /></td></tr></table></form></center>";
+        if(request.getParameter("cname")!=null) {
+            int a=Integer.parseInt(request.getParameter("cid"));
+            String b=request.getParameter("cname");
+            String c=request.getParameter("cbrand");
+            Cars cc=new Cars();
+            cc.setCid(a);
+            cc.setCname(b);
+            cc.setCbrand(c);
+            lc.add(cc);
+            out.println("<ul>");
+            for(Cars ca:lc) {
+                out.println("<li>"+ca.getCid()+"&nbsp;"+ca.getCname()+"&nbsp;"+ca.getCbrand()+"</li>");
+            }
+            out.println("</ul>");
+        }
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }
+```
+
 //////
+
+```java
 package co.cls.st;
 
 import java.io.IOException;
@@ -477,7 +509,7 @@ import co.cls.mods.ListCars;
  */
 @WebServlet("/CarForm")
 public class CarForm extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -487,48 +519,48 @@ public class CarForm extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
     ListCars lca=new ListCars();
     List<Cars> lc=lca.retCList();
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.addHeader("content-type", "text/html");
-		PrintWriter out=response.getWriter();
-		String op="<center><h1>Car Entry Form</h1><br/><hr/><br/><form><table border=1><tr><td>Car Id</td><td><input type=text name=cid /></td></tr>";
-		op+="<tr><td>Car Name</td><td><input type=text name=cname /></td></tr>";
-		op+="<tr><td>Car Brand</td><td><input type=text name=cbrand /></td></tr>";
-		op+="<tr><td><input type=submit value=Send /></td><td><input type=reset value=Cancel /></td></tr></table></form></center>";
-		out.println(op+"<br/><hr/><br/>");
-		if(request.getParameter("cname")!=null) {
-			int a=Integer.parseInt(request.getParameter("cid"));
-			String b=request.getParameter("cname");
-			String c=request.getParameter("cbrand");
-			Cars cc=new Cars();
-			cc.setCid(a);
-			cc.setCname(b);
-			cc.setCbrand(c);
-			lc.add(cc);
-			out.println("<ul>");
-			for(Cars ca:lc) {
-				out.println("<li>"+ca.getCid()+"&nbsp;"+ca.getCname()+"&nbsp;"+ca.getCbrand()+"</li>");
-			}
-			out.println("</ul>");
-		}
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.addHeader("content-type", "text/html");
+        PrintWriter out=response.getWriter();
+        String op="<center><h1>Car Entry Form</h1><br/><hr/><br/><form><table border=1><tr><td>Car Id</td><td><input type=text name=cid /></td></tr>";
+        op+="<tr><td>Car Name</td><td><input type=text name=cname /></td></tr>";
+        op+="<tr><td>Car Brand</td><td><input type=text name=cbrand /></td></tr>";
+        op+="<tr><td><input type=submit value=Send /></td><td><input type=reset value=Cancel /></td></tr></table></form></center>";
+        out.println(op+"<br/><hr/><br/>");
+        if(request.getParameter("cname")!=null) {
+            int a=Integer.parseInt(request.getParameter("cid"));
+            String b=request.getParameter("cname");
+            String c=request.getParameter("cbrand");
+            Cars cc=new Cars();
+            cc.setCid(a);
+            cc.setCname(b);
+            cc.setCbrand(c);
+            lc.add(cc);
+            out.println("<ul>");
+            for(Cars ca:lc) {
+                out.println("<li>"+ca.getCid()+"&nbsp;"+ca.getCname()+"&nbsp;"+ca.getCbrand()+"</li>");
+            }
+            out.println("</ul>");
+        }
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }
+```
 
-
-/////
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -536,60 +568,63 @@ public class CarForm extends HttpServlet {
 <title>Home page</title>
 </head>
 <body>
-	<table>
-		<tr>
-			<td><a href="./BServe">First Servlet</a></td>
-			<td><a href="./Index">Second Servlet</a></td>
-			<td><a href="./DetServe">Third Servlet</a></td>
-			<td><a href="./CarForm">Car Form</a></td>
-		</tr>
-	</table>
+    <table>
+        <tr>
+            <td><a href="./BServe">First Servlet</a></td>
+            <td><a href="./Index">Second Servlet</a></td>
+            <td><a href="./DetServe">Third Servlet</a></td>
+            <td><a href="./CarForm">Car Form</a></td>
+        </tr>
+    </table>
 </body>
 </html>
-/////
+```
+```java
 response.addHeader("content-type", "text/html");
-		PrintWriter out=response.getWriter();
-		String j="Iam coming from previous servlet";
-		HttpSession sess=request.getSession();
-		Cars c=new Cars();
-		c.setCid(212);
-		c.setCname("Brando");
-		c.setCbrand("Citroen");
-		sess.setAttribute("val", j);
-		sess.setAttribute("car", c);
-		//Client Side
-		Cookie cook=new Cookie("cooka", "This is val of cookie");
-		response.addCookie(cook);
-		//Client side
-		response.sendRedirect("./SecServe?name=mukesh&email=mukesh@yahoo.com&mobile=93838383838");
-		out.println("<h1>First Servlet</h1>");
+        PrintWriter out=response.getWriter();
+        String j="Iam coming from previous servlet";
+        HttpSession sess=request.getSession();
+        Cars c=new Cars();
+        c.setCid(212);
+        c.setCname("Brando");
+        c.setCbrand("Citroen");
+        sess.setAttribute("val", j);
+        sess.setAttribute("car", c);
+        //Client Side
+        Cookie cook=new Cookie("cooka", "This is val of cookie");
+        response.addCookie(cook);
+        //Client side
+        response.sendRedirect("./SecServe?name=mukesh&email=mukesh@yahoo.com&mobile=93838383838");
+        out.println("<h1>First Servlet</h1>");
 ////
-	response.addHeader("content-type", "text/html");
-		PrintWriter out=response.getWriter();
-		HttpSession sess=request.getSession();
-		if(sess.getAttribute("val")!=null) {
-			out.println("<h1>The value from other serv is "+sess.getAttribute("val").toString()+"</h1>");
-		}
-		if(sess.getAttribute("car")!=null) {
-			Cars cc=(Cars)sess.getAttribute("car");
-			out.println(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
-		}
-		
-		Cookie[] cArr=request.getCookies();
-		for(Cookie co:cArr) {
-			if(co.getName().equals("cooka"))
-			out.println(co.getName()+" "+co.getValue());
-		}
-	
-		String jj=request.getQueryString();
+    response.addHeader("content-type", "text/html");
+        PrintWriter out=response.getWriter();
+        HttpSession sess=request.getSession();
+        if(sess.getAttribute("val")!=null) {
+            out.println("<h1>The value from other serv is "+sess.getAttribute("val").toString()+"</h1>");
+        }
+        if(sess.getAttribute("car")!=null) {
+            Cars cc=(Cars)sess.getAttribute("car");
+            out.println(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
+        }
+        
+        Cookie[] cArr=request.getCookies();
+        for(Cookie co:cArr) {
+            if(co.getName().equals("cooka"))
+            out.println(co.getName()+" "+co.getValue());
+        }
+    
+        String jj=request.getQueryString();
 //		out.println("<br/>"+jj);
-		String[] jArr=jj.split("&");
-		for(String j:jArr) {
-			String[] a=j.split("=");
-			if(a.length>0)
-			out.println(a[1]);
-		}
-/////
+        String[] jArr=jj.split("&");
+        for(String j:jArr) {
+            String[] a=j.split("=");
+            if(a.length>0)
+            out.println(a[1]);
+        }
+```
+
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -597,31 +632,33 @@ response.addHeader("content-type", "text/html");
 <title>Form A</title>
 </head>
 <body>
-	<!--  -->
+    <!--  -->
 
-	<form action="http://localhost:8080/UnisysProjB/FormServA" method="post">
-		<table>
-			<tr>
-				<td>Car Id</td>
-				<td><input type="number" name="cid" /></td>
-			</tr>
-			<tr>
-				<td>Car Name</td>
-				<td><input type="text" name="cname" /></td>
-			</tr>
-			<tr>
-				<td>Car Brand</td>
-				<td><input type="text" name="cbrand" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Send" /></td>
-				<td><input type="reset" value="Cancel" /></td>
-			</tr>
-		</table>
-	</form>
+    <form action="http://localhost:8080/UnisysProjB/FormServA" method="post">
+        <table>
+            <tr>
+                <td>Car Id</td>
+                <td><input type="number" name="cid" /></td>
+            </tr>
+            <tr>
+                <td>Car Name</td>
+                <td><input type="text" name="cname" /></td>
+            </tr>
+            <tr>
+                <td>Car Brand</td>
+                <td><input type="text" name="cbrand" /></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Send" /></td>
+                <td><input type="reset" value="Cancel" /></td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>
-/////
+```
+
+```java
 package co.cls.st;
 
 import java.io.IOException;
@@ -640,7 +677,7 @@ import co.cls.mods.Cars;
  */
 @WebServlet("/FormServA")
 public class FormServA extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -650,67 +687,77 @@ public class FormServA extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-		if(request.getParameter("cid")!=null) {
-			int a=Integer.parseInt(request.getParameter("cid"));
-			String b=request.getParameter("cname");
-			String c=request.getParameter("cbrand");
-			Cars cc=new Cars();
-			cc.setCid(a);
-			cc.setCname(b);
-			cc.setCbrand(c);
-			out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
-		}
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out=response.getWriter();
+        if(request.getParameter("cid")!=null) {
+            int a=Integer.parseInt(request.getParameter("cid"));
+            String b=request.getParameter("cname");
+            String c=request.getParameter("cbrand");
+            Cars cc=new Cars();
+            cc.setCid(a);
+            cc.setCname(b);
+            cc.setCbrand(c);
+            out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
+        }
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		doGet(request, response);
-		PrintWriter out=response.getWriter();
-		if(request.getParameter("cid")!=null) {
-			int a=Integer.parseInt(request.getParameter("cid"));
-			String b=request.getParameter("cname");
-			String c=request.getParameter("cbrand");
-			Cars cc=new Cars();
-			cc.setCid(a);
-			cc.setCname(b);
-			cc.setCbrand(c);
-			out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
-		}
-	
-	
-	}
+        PrintWriter out=response.getWriter();
+        if(request.getParameter("cid")!=null) {
+            int a=Integer.parseInt(request.getParameter("cid"));
+            String b=request.getParameter("cname");
+            String c=request.getParameter("cbrand");
+            Cars cc=new Cars();
+            cc.setCid(a);
+            cc.setCname(b);
+            cc.setCbrand(c);
+            out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
+        }
+    
+    
+    }
 
 }
-///////
+```
+
+* Create a Database
+```sql
 create database unifirst;
-//////
+```
+* Create a table called Cars
+```sql
 create table cars(cid int primary key,cname varchar(50),cbrand varchar(50));
-//////
-desc cars;
-////
+```
+* See the table definition ```sql desc cars ```;
+* Insert values into databases
+```sql
 insert into cars values(5,'Lexus','Nexus');
-///////
-//Start
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "admin");
-				PreparedStatement ps=conn.prepareStatement("insert into cars values("+a+",'"+b+"','"+c+"')");
-				ps.execute();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+```
 
+---
+```java
+try {
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "admin");
+    PreparedStatement ps=conn.prepareStatement("insert into cars values("+a+",'"+b+"','"+c+"')");
+    ps.execute();
+} catch (ClassNotFoundException e) {
+    e.printStackTrace();
+} catch (SQLException e) {
+    e.printStackTrace();
+}
+```
 
-////////////////
+---
+
+```java
 package co.cls.st;
 
 import java.io.IOException;
@@ -733,7 +780,7 @@ import co.cls.mods.Cars;
  */
 @WebServlet("/FormServA")
 public class FormServA extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -743,60 +790,60 @@ public class FormServA extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-		if(request.getParameter("cid")!=null) {
-			int a=Integer.parseInt(request.getParameter("cid"));
-			String b=request.getParameter("cname");
-			String c=request.getParameter("cbrand");
-			Cars cc=new Cars();
-			cc.setCid(a);
-			cc.setCname(b);
-			cc.setCbrand(c);
-			
-			
-			out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
-		}
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out=response.getWriter();
+        if(request.getParameter("cid")!=null) {
+            int a=Integer.parseInt(request.getParameter("cid"));
+            String b=request.getParameter("cname");
+            String c=request.getParameter("cbrand");
+            Cars cc=new Cars();
+            cc.setCid(a);
+            cc.setCname(b);
+            cc.setCbrand(c);
+            
+            
+            out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
+        }
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		doGet(request, response);
-		PrintWriter out=response.getWriter();
-		if(request.getParameter("cid")!=null) {
-			int a=Integer.parseInt(request.getParameter("cid"));
-			String b=request.getParameter("cname");
-			String c=request.getParameter("cbrand");
-			Cars cc=new Cars();
-			cc.setCid(a);
-			cc.setCname(b);
-			cc.setCbrand(c);
-			
-			//Start
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "admin");
-				PreparedStatement ps=conn.prepareStatement("insert into cars values("+a+",'"+b+"','"+c+"')");
-				ps.execute();
-				out.println("Data Inserted<br/>");
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-			//End
-			
-			out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
-		}
-	
-	
-	}
+        PrintWriter out=response.getWriter();
+        if(request.getParameter("cid")!=null) {
+            int a=Integer.parseInt(request.getParameter("cid"));
+            String b=request.getParameter("cname");
+            String c=request.getParameter("cbrand");
+            Cars cc=new Cars();
+            cc.setCid(a);
+            cc.setCname(b);
+            cc.setCbrand(c);
+            
+            //Start
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "admin");
+                PreparedStatement ps=conn.prepareStatement("insert into cars values("+a+",'"+b+"','"+c+"')");
+                ps.execute();
+                out.println("Data Inserted<br/>");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            
+            //End
+            
+            out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
+        }
+    
+    
+    }
 
 }
 ///////////
@@ -822,7 +869,7 @@ import co.cls.mods.Cars;
  */
 @WebServlet("/FormServA")
 public class FormServA extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -832,61 +879,61 @@ public class FormServA extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-		if(request.getParameter("cid")!=null) {
-			int a=Integer.parseInt(request.getParameter("cid"));
-			String b=request.getParameter("cname");
-			String c=request.getParameter("cbrand");
-			Cars cc=new Cars();
-			cc.setCid(a);
-			cc.setCname(b);
-			cc.setCbrand(c);
-			
-			
-			out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
-		}
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out=response.getWriter();
+        if(request.getParameter("cid")!=null) {
+            int a=Integer.parseInt(request.getParameter("cid"));
+            String b=request.getParameter("cname");
+            String c=request.getParameter("cbrand");
+            Cars cc=new Cars();
+            cc.setCid(a);
+            cc.setCname(b);
+            cc.setCbrand(c);
+            
+            
+            out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
+        }
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		doGet(request, response);
-		PrintWriter out=response.getWriter();
-		if(request.getParameter("cid")!=null) {
-			int a=Integer.parseInt(request.getParameter("cid"));
-			String b=request.getParameter("cname");
-			String c=request.getParameter("cbrand");
-			Cars cc=new Cars();
-			cc.setCid(a);
-			cc.setCname(b);
-			cc.setCbrand(c);
-			
-			//Start
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "admin");
-				PreparedStatement ps=conn.prepareStatement("insert into cars values("+a+",'"+b+"','"+c+"')");
-				ps.execute();
+        PrintWriter out=response.getWriter();
+        if(request.getParameter("cid")!=null) {
+            int a=Integer.parseInt(request.getParameter("cid"));
+            String b=request.getParameter("cname");
+            String c=request.getParameter("cbrand");
+            Cars cc=new Cars();
+            cc.setCid(a);
+            cc.setCname(b);
+            cc.setCbrand(c);
+            
+            //Start
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "admin");
+                PreparedStatement ps=conn.prepareStatement("insert into cars values("+a+",'"+b+"','"+c+"')");
+                ps.execute();
 //				out.println("Data Inserted<br/>");
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-			//End
-			
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            
+            //End
+            
 //			out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
-			response.sendRedirect("./FormA.html");
-		}
-	
-	
-	}
+            response.sendRedirect("./FormA.html");
+        }
+    
+    
+    }
 
 }
 ///////
@@ -911,7 +958,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/SelServe")
 public class SelServe extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -921,48 +968,48 @@ public class SelServe extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-		response.setContentType("text/html");
-		out.println("<h1>List Of Cars In Our Garaga</h1><br/><hr/><br/>");
-		//Start
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "admin");
-			Statement st=conn.createStatement();
-			ResultSet rs=st.executeQuery("select * from cars");
-			out.println("<center><table border=1><tr><td>CarID</td><td>Car Name</td><td>Car Brand</tr>");
-			while(rs.next()) {
-				out.println("<tr><td>"+rs.getInt(1)+"</td><td>"+rs.getString(2)+"</td><td>"+rs.getString(3)+"</td></tr>");
-			}
-			out.println("</table></center>");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		//End
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out=response.getWriter();
+        response.setContentType("text/html");
+        out.println("<h1>List Of Cars In Our Garaga</h1><br/><hr/><br/>");
+        //Start
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "admin");
+            Statement st=conn.createStatement();
+            ResultSet rs=st.executeQuery("select * from cars");
+            out.println("<center><table border=1><tr><td>CarID</td><td>Car Name</td><td>Car Brand</tr>");
+            while(rs.next()) {
+                out.println("<tr><td>"+rs.getInt(1)+"</td><td>"+rs.getString(2)+"</td><td>"+rs.getString(3)+"</td></tr>");
+            }
+            out.println("</table></center>");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //End
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }
 ////
 PreparedStatement ps=conn.prepareStatement("update cars set cname='"+b+"',cbrand='"+c+"' where cid="+a);
-				ps.executeUpdate();
+                ps.executeUpdate();
 
 /////
 PreparedStatement ps=conn.prepareStatement("delete from cars where cid="+a);
-				ps.executeUpdate();
+                ps.executeUpdate();
 /////
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `spcars`()
@@ -991,7 +1038,7 @@ import co.tis.p2.Cars;
  */
 @WebServlet("/FormServA")
 public class FormServA extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -1001,60 +1048,60 @@ public class FormServA extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-		if(request.getParameter("cid")!=null) {
-			int a=Integer.parseInt(request.getParameter("cid"));
-			String b=request.getParameter("cname");
-			String c=request.getParameter("cbrand");
-			Cars cc=new Cars();
-			cc.setCid(a);
-			cc.setCname(b);
-			cc.setCbrand(c);
-			out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
-			
-		}
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out=response.getWriter();
+        if(request.getParameter("cid")!=null) {
+            int a=Integer.parseInt(request.getParameter("cid"));
+            String b=request.getParameter("cname");
+            String c=request.getParameter("cbrand");
+            Cars cc=new Cars();
+            cc.setCid(a);
+            cc.setCname(b);
+            cc.setCbrand(c);
+            out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
+            
+        }
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		doGet(request, response);
-		PrintWriter out=response.getWriter();
-		if(request.getParameter("cid")!=null) {
-			int a=Integer.parseInt(request.getParameter("cid"));
-			String b=request.getParameter("cname");
-			String c=request.getParameter("cbrand");
-			Cars cc=new Cars();
-			cc.setCid(a);
-			cc.setCname(b);
-			cc.setCbrand(c);
-			//Start
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "unisys@1321");
-				PreparedStatement ps=conn.prepareStatement("insert into cars values("+a+",'"+b+"','"+c+"')");
-				//PreparedStatement ps=conn.prepareStatement("update cars set cname='"+b+"',cbrand='"+c+"' where cid="+a);
-				//ps.executeUpdate();
-				ps.execute();
-				out.println("Data Inserted<br/>");
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-			//End
-			
-			out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
-		}
-	
-	
-	}
+        PrintWriter out=response.getWriter();
+        if(request.getParameter("cid")!=null) {
+            int a=Integer.parseInt(request.getParameter("cid"));
+            String b=request.getParameter("cname");
+            String c=request.getParameter("cbrand");
+            Cars cc=new Cars();
+            cc.setCid(a);
+            cc.setCname(b);
+            cc.setCbrand(c);
+            //Start
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "unisys@1321");
+                PreparedStatement ps=conn.prepareStatement("insert into cars values("+a+",'"+b+"','"+c+"')");
+                //PreparedStatement ps=conn.prepareStatement("update cars set cname='"+b+"',cbrand='"+c+"' where cid="+a);
+                //ps.executeUpdate();
+                ps.execute();
+                out.println("Data Inserted<br/>");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            
+            //End
+            
+            out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
+        }
+    
+    
+    }
 
 }
 
@@ -1080,7 +1127,7 @@ import co.tis.p2.Cars;
  */
 @WebServlet("/FormServA")
 public class FormServA extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -1090,60 +1137,60 @@ public class FormServA extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-		if(request.getParameter("cid")!=null) {
-			int a=Integer.parseInt(request.getParameter("cid"));
-			String b=request.getParameter("cname");
-			String c=request.getParameter("cbrand");
-			Cars cc=new Cars();
-			cc.setCid(a);
-			cc.setCname(b);
-			cc.setCbrand(c);
-			out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
-			
-		}
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out=response.getWriter();
+        if(request.getParameter("cid")!=null) {
+            int a=Integer.parseInt(request.getParameter("cid"));
+            String b=request.getParameter("cname");
+            String c=request.getParameter("cbrand");
+            Cars cc=new Cars();
+            cc.setCid(a);
+            cc.setCname(b);
+            cc.setCbrand(c);
+            out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
+            
+        }
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		doGet(request, response);
-		PrintWriter out=response.getWriter();
-		if(request.getParameter("cid")!=null) {
-			int a=Integer.parseInt(request.getParameter("cid"));
-			String b=request.getParameter("cname");
-			String c=request.getParameter("cbrand");
-			Cars cc=new Cars();
-			cc.setCid(a);
-			cc.setCname(b);
-			cc.setCbrand(c);
-			//Start
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "unisys@1321");
-				PreparedStatement ps=conn.prepareStatement("insert into cars values("+a+",'"+b+"','"+c+"')");
-				//PreparedStatement ps=conn.prepareStatement("update cars set cname='"+b+"',cbrand='"+c+"' where cid="+a);
-				//ps.executeUpdate();
-				ps.execute();
-				out.println("Data Inserted<br/>");
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-			//End
-			
-			out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
-		}
-	
-	
-	}
+        PrintWriter out=response.getWriter();
+        if(request.getParameter("cid")!=null) {
+            int a=Integer.parseInt(request.getParameter("cid"));
+            String b=request.getParameter("cname");
+            String c=request.getParameter("cbrand");
+            Cars cc=new Cars();
+            cc.setCid(a);
+            cc.setCname(b);
+            cc.setCbrand(c);
+            //Start
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "unisys@1321");
+                PreparedStatement ps=conn.prepareStatement("insert into cars values("+a+",'"+b+"','"+c+"')");
+                //PreparedStatement ps=conn.prepareStatement("update cars set cname='"+b+"',cbrand='"+c+"' where cid="+a);
+                //ps.executeUpdate();
+                ps.execute();
+                out.println("Data Inserted<br/>");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            
+            //End
+            
+            out.print(cc.getCid()+" "+cc.getCname()+" "+cc.getCbrand());
+        }
+    
+    
+    }
 
 }
 
@@ -1169,7 +1216,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/SelServe")
 public class SelServe extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -1179,44 +1226,44 @@ public class SelServe extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-		response.setContentType("text/html");
-		out.println("<h1>List Of Cars In Our Garaga</h1><br/><hr/><br/>");
-		//Start
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "unisys@1321");
-			Statement st=conn.createStatement();
-			ResultSet rs=st.executeQuery("select * from cars");
-			out.println("<center><table border=1><tr><td>CarID</td><td>Car Name</td><td>Car Brand</tr>");
-			while(rs.next()) {
-				out.println("<tr><td>"+rs.getInt(1)+"</td><td>"+rs.getString(2)+"</td><td>"+rs.getString(3)+"</td></tr>");
-			}
-			out.println("</table></center>");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out=response.getWriter();
+        response.setContentType("text/html");
+        out.println("<h1>List Of Cars In Our Garaga</h1><br/><hr/><br/>");
+        //Start
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "unisys@1321");
+            Statement st=conn.createStatement();
+            ResultSet rs=st.executeQuery("select * from cars");
+            out.println("<center><table border=1><tr><td>CarID</td><td>Car Name</td><td>Car Brand</tr>");
+            while(rs.next()) {
+                out.println("<tr><td>"+rs.getInt(1)+"</td><td>"+rs.getString(2)+"</td><td>"+rs.getString(3)+"</td></tr>");
+            }
+            out.println("</table></center>");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }
 /////////////14-05-2024///////////
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 c
 ////
 [disconnected /] connect
@@ -1226,34 +1273,34 @@ The controller is not available at localhost:9999
 package co.sa.cl;
 
 public class Books {
-	public int getBid() {
-		return bid;
-	}
-	public void setBid(int bid) {
-		this.bid = bid;
-	}
-	public String getBanme() {
-		return banme;
-	}
-	public void setBanme(String banme) {
-		this.banme = banme;
-	}
-	public String getBauth() {
-		return bauth;
-	}
-	public void setBauth(String bauth) {
-		this.bauth = bauth;
-	}
-	private int bid;
-	private String banme;
-	private String bauth;
+    public int getBid() {
+        return bid;
+    }
+    public void setBid(int bid) {
+        this.bid = bid;
+    }
+    public String getBanme() {
+        return banme;
+    }
+    public void setBanme(String banme) {
+        this.banme = banme;
+    }
+    public String getBauth() {
+        return bauth;
+    }
+    public void setBauth(String bauth) {
+        this.bauth = bauth;
+    }
+    private int bid;
+    private String banme;
+    private String bauth;
 }
 /////
 <%@page import="co.sa.cl.BookList"%>
 <%@page import="java.util.List"%>
 <%@page import="co.sa.cl.Books"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -1263,63 +1310,63 @@ public class Books {
 <%!String[] arr = { "Physics", "nuclear Physics", "Geo Physics", "Nano Physics", "Meta Physics" };%>
 <body>
 
-	<%
-	out.println("<h1>This is JSP Welcome!</h1>");
-	%>
-	<ul
-		style="background-color: gray; color: maroon; list-style-type: hebrew;">
-		<%
-		for (String j : arr) {
-		%>
-		<li><%=j.toUpperCase()%></li>
-		<%
-		}
-		%>
-	</ul>
-	<br />
-	<%
-	Books b = new Books();
-	b.setBid(212);
-	b.setBanme("Last Sigh Of Moor");
-	b.setBauth("Salman Rushdie");
-	List<Books> lb = null;
-	BookList blist = new BookList();
-	lb = blist.retList();
-	%>
-	<table>
-		<tr>
-			<td><%=b.getBid()%></td>
-			<td><%=b.getBanme()%></td>
-			<td><%=b.getBauth()%></td>
-		</tr>
-	</table>
-	<br />
-	<hr />
-	<br />
-	<h1>List Of Books</h1>
-	<br />
-	<table border=1 style="background-color: navy;color:yellow;">
-		<thead>
-			<tr>
-				<th>Book ID</th>
-				<th>Book Name</th>
-				<th>Book Author</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-			for (Books book : lb) {
-			%>
-			<tr>
-				<td><%=book.getBid()%></td>
-				<td><%=book.getBanme()%></td>
-				<td><%=book.getBauth()%></td>
-			</tr>
-			<%
-			}
-			%>
-		</tbody>
-	</table>
+    <%
+    out.println("<h1>This is JSP Welcome!</h1>");
+    %>
+    <ul
+        style="background-color: gray; color: maroon; list-style-type: hebrew;">
+        <%
+        for (String j : arr) {
+        %>
+        <li><%=j.toUpperCase()%></li>
+        <%
+        }
+        %>
+    </ul>
+    <br />
+    <%
+    Books b = new Books();
+    b.setBid(212);
+    b.setBanme("Last Sigh Of Moor");
+    b.setBauth("Salman Rushdie");
+    List<Books> lb = null;
+    BookList blist = new BookList();
+    lb = blist.retList();
+    %>
+    <table>
+        <tr>
+            <td><%=b.getBid()%></td>
+            <td><%=b.getBanme()%></td>
+            <td><%=b.getBauth()%></td>
+        </tr>
+    </table>
+    <br />
+    <hr />
+    <br />
+    <h1>List Of Books</h1>
+    <br />
+    <table border=1 style="background-color: navy;color:yellow;">
+        <thead>
+            <tr>
+                <th>Book ID</th>
+                <th>Book Name</th>
+                <th>Book Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%
+            for (Books book : lb) {
+            %>
+            <tr>
+                <td><%=book.getBid()%></td>
+                <td><%=book.getBanme()%></td>
+                <td><%=book.getBauth()%></td>
+            </tr>
+            <%
+            }
+            %>
+        </tbody>
+    </table>
 </body>
 </html>
 /////
@@ -1330,20 +1377,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BookList {
-	public List<Books> retList(){
-		List<Books> ls=new ArrayList<Books>();
-		int[] arr1= {1,2,3,4,5};
-		String[] arr2= {"Adventures of tom sawyer","Kane and abel","elephant song","Pelican brief","God of small things"};
-		String[] arr3= {"Mark twain","J Archer","Wilbur smith","John Grisham","Arundhati roy"};
-		for (int i = 0; i < arr3.length; i++) {
-			Books b=new Books();
-			b.setBid(arr1[i]);
-			b.setBanme(arr2[i]);
-			b.setBauth(arr3[i]);
-			ls.add(b);
-		}
-		return ls;
-	}
+    public List<Books> retList(){
+        List<Books> ls=new ArrayList<Books>();
+        int[] arr1= {1,2,3,4,5};
+        String[] arr2= {"Adventures of tom sawyer","Kane and abel","elephant song","Pelican brief","God of small things"};
+        String[] arr3= {"Mark twain","J Archer","Wilbur smith","John Grisham","Arundhati roy"};
+        for (int i = 0; i < arr3.length; i++) {
+            Books b=new Books();
+            b.setBid(arr1[i]);
+            b.setBanme(arr2[i]);
+            b.setBauth(arr3[i]);
+            ls.add(b);
+        }
+        return ls;
+    }
 }
 //////
 /////
@@ -1357,28 +1404,28 @@ public class BookList {
 </head>
 <body>
 <form method="get" action="http://localhost:8080/UnisysProjC/bpage.jsp">
-		<table>
-			<tr>
-				<td>Book Id</td>
-				<td><input type="number" required="required"
-					placeholder="enter id" name="bid" /></td>
-			</tr>
-			<tr>
-				<td>Book Name</td>
-				<td><input type="text" required="required"
-					placeholder="enter name" name="bname" /></td>
-			</tr>
-			<tr>
-				<td>Book Author</td>
-				<td><input type="text" required="required"
-					placeholder="enter author" name="bauth" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Submit" /></td>
-				<td><input type="reset" value="cancel" /></td>
-			</tr>
-		</table>
-	</form>
+        <table>
+            <tr>
+                <td>Book Id</td>
+                <td><input type="number" required="required"
+                    placeholder="enter id" name="bid" /></td>
+            </tr>
+            <tr>
+                <td>Book Name</td>
+                <td><input type="text" required="required"
+                    placeholder="enter name" name="bname" /></td>
+            </tr>
+            <tr>
+                <td>Book Author</td>
+                <td><input type="text" required="required"
+                    placeholder="enter author" name="bauth" /></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit" /></td>
+                <td><input type="reset" value="cancel" /></td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>
 ////
@@ -1396,10 +1443,10 @@ String j=request.getQueryString();
 //out.println(j);
 String arr[]=j.split("&");
 for(String a:arr){
-	String h[]=a.split("=");
-	if(h.length>0){
-		out.println(h[1]+"<br/>");
-	}
+    String h[]=a.split("=");
+    if(h.length>0){
+        out.println(h[1]+"<br/>");
+    }
 }
 
 %>
@@ -1417,43 +1464,43 @@ for(String a:arr){
 </head>
 <body>
 <form method="post">
-		<table>
-			<tr>
-				<td>Book Id</td>
-				<td><input type="number" required="required"
-					placeholder="enter id" name="bid" /></td>
-			</tr>
-			<tr>
-				<td>Book Name</td>
-				<td><input type="text" required="required"
-					placeholder="enter name" name="bname" /></td>
-			</tr>
-			<tr>
-				<td>Book Author</td>
-				<td><input type="text" required="required"
-					placeholder="enter author" name="bauth" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Submit" /></td>
-				<td><input type="reset" value="cancel" /></td>
-			</tr>
-		</table>
-	</form>
-	<%
-	if(request.getParameter("bid")!=null){
-		int a=Integer.parseInt(request.getParameter("bid"));
-		String b=request.getParameter("bname");
-		String c=request.getParameter("bauth");
-		Books ba=new Books();
-		ba.setBid(a);
-		ba.setBanme(b);
-		ba.setBauth(c);
-		session.setAttribute("book", ba);
-		Cookie cook=new Cookie("cook",ba.getBanme()+" "+ba.getBauth());
-		response.addCookie(cook);
-		out.println("<form action=\"http://localhost:8080/UnisysProjC/dpage.jsp\"><input type=submit value=Send /></form>");
-	}
-	%>
+        <table>
+            <tr>
+                <td>Book Id</td>
+                <td><input type="number" required="required"
+                    placeholder="enter id" name="bid" /></td>
+            </tr>
+            <tr>
+                <td>Book Name</td>
+                <td><input type="text" required="required"
+                    placeholder="enter name" name="bname" /></td>
+            </tr>
+            <tr>
+                <td>Book Author</td>
+                <td><input type="text" required="required"
+                    placeholder="enter author" name="bauth" /></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Submit" /></td>
+                <td><input type="reset" value="cancel" /></td>
+            </tr>
+        </table>
+    </form>
+    <%
+    if(request.getParameter("bid")!=null){
+        int a=Integer.parseInt(request.getParameter("bid"));
+        String b=request.getParameter("bname");
+        String c=request.getParameter("bauth");
+        Books ba=new Books();
+        ba.setBid(a);
+        ba.setBanme(b);
+        ba.setBauth(c);
+        session.setAttribute("book", ba);
+        Cookie cook=new Cookie("cook",ba.getBanme()+" "+ba.getBauth());
+        response.addCookie(cook);
+        out.println("<form action=\"http://localhost:8080/UnisysProjC/dpage.jsp\"><input type=submit value=Send /></form>");
+    }
+    %>
 </body>
 </html>
 //////
@@ -1472,8 +1519,8 @@ Books ba=(Books)session.getAttribute("book");
 out.println(ba.getBid()+" "+ba.getBanme()+" "+ba.getBauth());
 Cookie[] cArr=request.getCookies();
 for(Cookie c:cArr){
-	if(c.getName().equals("cook"))
-	out.println("<br/><hr/><br/>"+c.getValue()); 
+    if(c.getName().equals("cook"))
+    out.println("<br/><hr/><br/>"+c.getValue()); 
 }
 %>
 </body>
@@ -1483,34 +1530,34 @@ package com.sat.mods;
 
 
 public class Register {
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getMobile() {
-		return mobile;
-	}
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-	private int id;
-	private String name;
-	private String email;
-	private String mobile;
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getMobile() {
+        return mobile;
+    }
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+    private int id;
+    private String name;
+    private String email;
+    private String mobile;
 }
 
 ////
@@ -1527,50 +1574,50 @@ import java.util.List;
 import com.sat.mods.Register;
 
 public class DbUtils {
-	Connection conn = null;
+    Connection conn = null;
 
-	public DbUtils() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "admin");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+    public DbUtils() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "admin");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-	public List<Register> retRegs() {
-		List<Register> lreg=new ArrayList<Register>();
-		try {
-			PreparedStatement ps=conn.prepareStatement("select * from register");
-			ResultSet rs=ps.executeQuery();
-			while(rs.next()) {
-				Register r=new Register();
-				r.setId(rs.getInt(1));
-				r.setName(rs.getString(2));
-				r.setEmail(rs.getString(3));
-				r.setMobile(rs.getString(4));
-				lreg.add(r);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return lreg;
-	}
+    public List<Register> retRegs() {
+        List<Register> lreg=new ArrayList<Register>();
+        try {
+            PreparedStatement ps=conn.prepareStatement("select * from register");
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()) {
+                Register r=new Register();
+                r.setId(rs.getInt(1));
+                r.setName(rs.getString(2));
+                r.setEmail(rs.getString(3));
+                r.setMobile(rs.getString(4));
+                lreg.add(r);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lreg;
+    }
 
-	public String insReg(Register r) {
+    public String insReg(Register r) {
 
-		return "";
-	}
+        return "";
+    }
 
-	public String upsReg(Register r) {
-		return "";
-	}
+    public String upsReg(Register r) {
+        return "";
+    }
 
-	public String delReg(int id) {
-		return "";
-	}
+    public String delReg(int id) {
+        return "";
+    }
 
 }
 /////
@@ -1586,112 +1633,112 @@ import java.util.List;
 import com.sat.mods.Register;
 
 public class DbUtils {
-	Connection conn = null;
+    Connection conn = null;
 
-	public DbUtils() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "admin");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+    public DbUtils() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "admin");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-	/***
-	 * Select query on table
-	 * @return List of register objects from db
-	 */
-	public List<Register> retRegs() {
-		List<Register> lreg=new ArrayList<Register>();
-		try {
-			PreparedStatement ps=conn.prepareStatement("select * from register");
-			ResultSet rs=ps.executeQuery();
-			while(rs.next()) {
-				Register r=new Register();
-				r.setId(rs.getInt(1));
-				r.setName(rs.getString(2));
-				r.setEmail(rs.getString(3));
-				r.setMobile(rs.getString(4));
-				lreg.add(r);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return lreg;
-	}
+    /***
+     * Select query on table
+     * @return List of register objects from db
+     */
+    public List<Register> retRegs() {
+        List<Register> lreg=new ArrayList<Register>();
+        try {
+            PreparedStatement ps=conn.prepareStatement("select * from register");
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()) {
+                Register r=new Register();
+                r.setId(rs.getInt(1));
+                r.setName(rs.getString(2));
+                r.setEmail(rs.getString(3));
+                r.setMobile(rs.getString(4));
+                lreg.add(r);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lreg;
+    }
 
-	/***
-	 * Inserts a new record into the table
-	 * @param r
-	 * @return
-	 */
-	public String insReg(Register r) {
-		String status="Notdone";
-		int a=r.getId();
-		String b=r.getName();
-		String c=r.getEmail();
-		String d=r.getMobile();
-		String query="insert into register values (?,?,?,?)";
-		try {
-			PreparedStatement ps=conn.prepareStatement(query);
-			ps.setInt(1, a);
-			ps.setString(2, b);
-			ps.setString(3, c);
-			ps.setString(4, d);
-			ps.execute();
-			status="done";
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return status;
-	}
+    /***
+     * Inserts a new record into the table
+     * @param r
+     * @return
+     */
+    public String insReg(Register r) {
+        String status="Notdone";
+        int a=r.getId();
+        String b=r.getName();
+        String c=r.getEmail();
+        String d=r.getMobile();
+        String query="insert into register values (?,?,?,?)";
+        try {
+            PreparedStatement ps=conn.prepareStatement(query);
+            ps.setInt(1, a);
+            ps.setString(2, b);
+            ps.setString(3, c);
+            ps.setString(4, d);
+            ps.execute();
+            status="done";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
 
-	/***
-	 * Updates the given record into the table
-	 * @param r
-	 * @return
-	 */
-	public String upsReg(Register r) {
-		String status="Notdone";
-		int a=r.getId();
-		String b=r.getName();
-		String c=r.getEmail();
-		String d=r.getMobile();
-		String query="update register set name=?,email=?,mobile=? where id=?";
-		try {
-			PreparedStatement ps=conn.prepareStatement(query);
-			ps.setString(1, b);
-			ps.setString(2, c);
-			ps.setString(3, d);
-			ps.setInt(4, a);
-			ps.executeUpdate();
-			status="done";
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return status;
-	}
+    /***
+     * Updates the given record into the table
+     * @param r
+     * @return
+     */
+    public String upsReg(Register r) {
+        String status="Notdone";
+        int a=r.getId();
+        String b=r.getName();
+        String c=r.getEmail();
+        String d=r.getMobile();
+        String query="update register set name=?,email=?,mobile=? where id=?";
+        try {
+            PreparedStatement ps=conn.prepareStatement(query);
+            ps.setString(1, b);
+            ps.setString(2, c);
+            ps.setString(3, d);
+            ps.setInt(4, a);
+            ps.executeUpdate();
+            status="done";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
 
-	/***
-	 * Deletes the record from the register table
-	 * @param id
-	 * @return
-	 */
-	public String delReg(int id) {
-		String status="Notdone";
-		String query="delete from register where id=?";
-		try {
-			PreparedStatement ps=conn.prepareStatement(query);
-			ps.setInt(1, id);
-			ps.executeUpdate();
-			status="done";
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return status;
-	}
+    /***
+     * Deletes the record from the register table
+     * @param id
+     * @return
+     */
+    public String delReg(int id) {
+        String status="Notdone";
+        String query="delete from register where id=?";
+        try {
+            PreparedStatement ps=conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            status="done";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
 }
 //////index.jsp////
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -1710,21 +1757,21 @@ public class DbUtils {
 </html>
 ////menu.jsp/////
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 </head>
 <body>
-	<table>
-		<tr>
-			<td><a href="./selpage.jsp">Select</a></td>
-			<td><a href="./inspage.jsp">Insert</a></td>
-			<td><a href="./upspage.jsp">Update</a></td>
-			<td><a href="./delpage.jsp">Delete</a></td>
-		</tr>
-	</table>
+    <table>
+        <tr>
+            <td><a href="./selpage.jsp">Select</a></td>
+            <td><a href="./inspage.jsp">Insert</a></td>
+            <td><a href="./upspage.jsp">Update</a></td>
+            <td><a href="./delpage.jsp">Delete</a></td>
+        </tr>
+    </table>
 </body>
 </html>
 ///////selepage.jsp/////
@@ -1788,7 +1835,7 @@ public class DbUtils {
 <%@page import="java.util.List"%>
 <%@page import="com.sa.db.DbUtils"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -1796,30 +1843,30 @@ public class DbUtils {
 <title>Select</title>
 </head>
 <%!DbUtils du = new DbUtils();
-	List<Register> lr = du.retRegs();%>
+    List<Register> lr = du.retRegs();%>
 <body>
-	<%@include file="./menu.jsp"%>
-	<h1>Selection of all records on register table</h1>
-	<center>
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Mobile</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-				for (Register r : lr) {
-					out.println("<tr><td>" + r.getId() + "</td><td>" + r.getName() + "</td><td>" + r.getEmail() + "</td><td>"
-					+ r.getMobile() + "</td></tr>");
-				}
-				%>
-			</tbody>
-		</table>
-	</center>
+    <%@include file="./menu.jsp"%>
+    <h1>Selection of all records on register table</h1>
+    <center>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                for (Register r : lr) {
+                    out.println("<tr><td>" + r.getId() + "</td><td>" + r.getName() + "</td><td>" + r.getEmail() + "</td><td>"
+                    + r.getMobile() + "</td></tr>");
+                }
+                %>
+            </tbody>
+        </table>
+    </center>
 </body>
 </html>
 /////selpage.jsp/////
@@ -1827,7 +1874,7 @@ public class DbUtils {
 <%@page import="java.util.List"%>
 <%@page import="com.sa.db.DbUtils"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -1835,30 +1882,30 @@ public class DbUtils {
 <title>Select</title>
 </head>
 <%!DbUtils du = new DbUtils();
-	List<Register> lr = du.retRegs();%>
+    List<Register> lr = du.retRegs();%>
 <body>
-	<%@include file="./menu.jsp"%>
-	<h1>Selection of all records on register table</h1>
-	<center>
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Mobile</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-				for (Register r : lr) {
-					out.println("<tr><td>" + r.getId() + "</td><td>" + r.getName() + "</td><td>" + r.getEmail() + "</td><td>"
-					+ r.getMobile() + "</td></tr>");
-				}
-				%>
-			</tbody>
-		</table>
-	</center>
+    <%@include file="./menu.jsp"%>
+    <h1>Selection of all records on register table</h1>
+    <center>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                for (Register r : lr) {
+                    out.println("<tr><td>" + r.getId() + "</td><td>" + r.getName() + "</td><td>" + r.getEmail() + "</td><td>"
+                    + r.getMobile() + "</td></tr>");
+                }
+                %>
+            </tbody>
+        </table>
+    </center>
 </body>
 </html>
 //////inspage.jsp////
@@ -1887,17 +1934,17 @@ public class DbUtils {
 </form>
 <%
 if(request.getParameter("id")!=null){
-	int a=Integer.parseInt(request.getParameter("id"));
-	String b=request.getParameter("name");
-	String c=request.getParameter("email");
-	String d=request.getParameter("mobile");
-	Register r=new Register();
-	r.setId(a);
-	r.setName(b);
-	r.setEmail(c);
-	r.setMobile(d);
-	du.insReg(r);
-	response.sendRedirect("./selpage.jsp");
+    int a=Integer.parseInt(request.getParameter("id"));
+    String b=request.getParameter("name");
+    String c=request.getParameter("email");
+    String d=request.getParameter("mobile");
+    Register r=new Register();
+    r.setId(a);
+    r.setName(b);
+    r.setEmail(c);
+    r.setMobile(d);
+    du.insReg(r);
+    response.sendRedirect("./selpage.jsp");
 }
 
 %>
@@ -1930,17 +1977,17 @@ if(request.getParameter("id")!=null){
 </form>
 <%
 if(request.getParameter("id")!=null){
-	int a=Integer.parseInt(request.getParameter("id"));
-	String b=request.getParameter("name");
-	String c=request.getParameter("email");
-	String d=request.getParameter("mobile");
-	Register r=new Register();
-	r.setId(a);
-	r.setName(b);
-	r.setEmail(c);
-	r.setMobile(d);
-	du.upsReg(r);
-	response.sendRedirect("./selpage.jsp");
+    int a=Integer.parseInt(request.getParameter("id"));
+    String b=request.getParameter("name");
+    String c=request.getParameter("email");
+    String d=request.getParameter("mobile");
+    Register r=new Register();
+    r.setId(a);
+    r.setName(b);
+    r.setEmail(c);
+    r.setMobile(d);
+    du.upsReg(r);
+    response.sendRedirect("./selpage.jsp");
 }
 
 %>
@@ -1970,9 +2017,9 @@ if(request.getParameter("id")!=null){
 </form>
 <%
 if(request.getParameter("id")!=null){
-	int a=Integer.parseInt(request.getParameter("id"));
-	du.delReg(a);
-	response.sendRedirect("./selpage.jsp");
+    int a=Integer.parseInt(request.getParameter("id"));
+    du.delReg(a);
+    response.sendRedirect("./selpage.jsp");
 }
 %>
 </body>
@@ -1982,23 +2029,23 @@ if(request.getParameter("id")!=null){
 
 
 public List<Register> retRegs() {
-		List<Register> lreg=new ArrayList<Register>();
-		try {
-			PreparedStatement ps=conn.prepareStatement("select * from register");
-			ResultSet rs=ps.executeQuery();
-			while(rs.next()) {
-				Register r=new Register();
-				r.setId(rs.getInt(1));
-				r.setName(rs.getString(2));
-				r.setEmail(rs.getString(3));
-				r.setMobile(rs.getString(4));
-				lreg.add(r);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return lreg;
-	}
+        List<Register> lreg=new ArrayList<Register>();
+        try {
+            PreparedStatement ps=conn.prepareStatement("select * from register");
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()) {
+                Register r=new Register();
+                r.setId(rs.getInt(1));
+                r.setName(rs.getString(2));
+                r.setEmail(rs.getString(3));
+                r.setMobile(rs.getString(4));
+                lreg.add(r);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lreg;
+    }
 
 
 ////
@@ -2014,136 +2061,136 @@ import java.util.List;
 import com.sat.mods.Register;
 
 public class DbUtils {
-	Connection conn = null;
+    Connection conn = null;
 
-	public DbUtils() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "admin");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+    public DbUtils() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/unifirst", "root", "admin");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-	/***
-	 * Select query on table
-	 * @return List of register objects from db
-	 */
-	public List<Register> retRegs() {
-		List<Register> lreg=new ArrayList<Register>();
-		try {
-			PreparedStatement ps=conn.prepareStatement("select * from register");
-			ResultSet rs=ps.executeQuery();
-			while(rs.next()) {
-				Register r=new Register();
-				r.setId(rs.getInt(1));
-				r.setName(rs.getString(2));
-				r.setEmail(rs.getString(3));
-				r.setMobile(rs.getString(4));
-				lreg.add(r);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return lreg;
-	}
+    /***
+     * Select query on table
+     * @return List of register objects from db
+     */
+    public List<Register> retRegs() {
+        List<Register> lreg=new ArrayList<Register>();
+        try {
+            PreparedStatement ps=conn.prepareStatement("select * from register");
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()) {
+                Register r=new Register();
+                r.setId(rs.getInt(1));
+                r.setName(rs.getString(2));
+                r.setEmail(rs.getString(3));
+                r.setMobile(rs.getString(4));
+                lreg.add(r);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lreg;
+    }
 
-	/***
-	 * Inserts a new record into the table
-	 * @param r
-	 * @return
-	 */
-	public String insReg(Register r) {
-		String status="Notdone";
-		int a=r.getId();
-		String b=r.getName();
-		String c=r.getEmail();
-		String d=r.getMobile();
-		String query="insert into register values (?,?,?,?)";
-		try {
-			PreparedStatement ps=conn.prepareStatement(query);
-			ps.setInt(1, a);
-			ps.setString(2, b);
-			ps.setString(3, c);
-			ps.setString(4, d);
-			ps.execute();
-			status="done";
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return status;
-	}
+    /***
+     * Inserts a new record into the table
+     * @param r
+     * @return
+     */
+    public String insReg(Register r) {
+        String status="Notdone";
+        int a=r.getId();
+        String b=r.getName();
+        String c=r.getEmail();
+        String d=r.getMobile();
+        String query="insert into register values (?,?,?,?)";
+        try {
+            PreparedStatement ps=conn.prepareStatement(query);
+            ps.setInt(1, a);
+            ps.setString(2, b);
+            ps.setString(3, c);
+            ps.setString(4, d);
+            ps.execute();
+            status="done";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
 
-	/***
-	 * Updates the given record into the table
-	 * @param r
-	 * @return
-	 */
-	public String upsReg(Register r) {
-		String status="Notdone";
-		int a=r.getId();
-		String b=r.getName();
-		String c=r.getEmail();
-		String d=r.getMobile();
-		String query="update register set name=?,email=?,mobile=? where id=?";
-		try {
-			PreparedStatement ps=conn.prepareStatement(query);
-			ps.setString(1, b);
-			ps.setString(2, c);
-			ps.setString(3, d);
-			ps.setInt(4, a);
-			ps.executeUpdate();
-			status="done";
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return status;
-	}
+    /***
+     * Updates the given record into the table
+     * @param r
+     * @return
+     */
+    public String upsReg(Register r) {
+        String status="Notdone";
+        int a=r.getId();
+        String b=r.getName();
+        String c=r.getEmail();
+        String d=r.getMobile();
+        String query="update register set name=?,email=?,mobile=? where id=?";
+        try {
+            PreparedStatement ps=conn.prepareStatement(query);
+            ps.setString(1, b);
+            ps.setString(2, c);
+            ps.setString(3, d);
+            ps.setInt(4, a);
+            ps.executeUpdate();
+            status="done";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
 
-	/***
-	 * Deletes the record from the register table
-	 * @param id
-	 * @return
-	 */
-	public String delReg(int id) {
-		String status="Notdone";
-		String query="delete from register where id=?";
-		try {
-			PreparedStatement ps=conn.prepareStatement(query);
-			ps.setInt(1, id);
-			ps.executeUpdate();
-			status="done";
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return status;
-	}
+    /***
+     * Deletes the record from the register table
+     * @param id
+     * @return
+     */
+    public String delReg(int id) {
+        String status="Notdone";
+        String query="delete from register where id=?";
+        try {
+            PreparedStatement ps=conn.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            status="done";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
 }
 /////
 <%@include file="./menu.jsp"%>
-	<h1>Selection of all records on register table</h1>
-	<center>
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Mobile</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-				for (Register r : lr) {
-					out.println("<tr><td>" + r.getId() + "</td><td>" + r.getName() + "</td><td>" + r.getEmail() + "</td><td>"
-					+ r.getMobile() + "</td></tr>");
-				}
-				%>
-			</tbody>
-		</table>
-	</center>
+    <h1>Selection of all records on register table</h1>
+    <center>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                for (Register r : lr) {
+                    out.println("<tr><td>" + r.getId() + "</td><td>" + r.getName() + "</td><td>" + r.getEmail() + "</td><td>"
+                    + r.getMobile() + "</td></tr>");
+                }
+                %>
+            </tbody>
+        </table>
+    </center>
 
 //////
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -2196,7 +2243,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/FirstServe")
 public class FirstServe extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -2206,25 +2253,25 @@ public class FirstServe extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out=response.getWriter();
-		HttpSession sess=request.getSession();
-		String u=sess.getAttribute("tester").toString();
-		out.println("<h1>"+u+"</h1>");
-		sess.setAttribute("atest", "EJB was ruling the world before spring");
-		response.sendRedirect("http://localhost:8080/UnisysProjC/oppage.jsp");
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        PrintWriter out=response.getWriter();
+        HttpSession sess=request.getSession();
+        String u=sess.getAttribute("tester").toString();
+        out.println("<h1>"+u+"</h1>");
+        sess.setAttribute("atest", "EJB was ruling the world before spring");
+        response.sendRedirect("http://localhost:8080/UnisysProjC/oppage.jsp");
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }
 /////
@@ -2250,7 +2297,7 @@ import javax.ejb.Remote;
 
 @Remote
 public interface FirstBeanRemote {
-	public String myMetha();
+    public String myMetha();
 }
 ////
 package com.ejb.ser.sat;
@@ -2263,10 +2310,10 @@ public class FirstBean implements FirstBeanRemote {
     public FirstBean() {
     }
 
-	@Override
-	public String myMetha() {
-		return "Welcome to EJB";
-	}
+    @Override
+    public String myMetha() {
+        return "Welcome to EJB";
+    }
 }
 
 /////Client Code/////
@@ -2282,41 +2329,41 @@ import com.ejb.ser.sat.FirstBean;
 import com.ejb.ser.sat.FirstBeanRemote;
 
 public class FirstClient {
-	public static void main(String[] args) throws NamingException {
-		FirstBeanRemote fb=EJBContextFactory.retBean("ejb:");
-		System.out.println("********"+fb.myMetha());
-	}
-	
-	private static class EJBContextFactory{
-		
-		private static FirstBeanRemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
-		
-		private static FirstBeanRemote retLookUp(String namespace) throws NamingException {
-			Context ctx=creaInitContext();
-			String appName="";
-			String moduleName="UnisysFirstProj";
-			String distinctName="";
-			String beanName=FirstBean.class.getSimpleName();
-			String ViewClassName=FirstBeanRemote.class.getName();
-			return (FirstBeanRemote)ctx.lookup(namespace+appName+"/"+moduleName+"/"+distinctName+"/"+beanName+"!"+ViewClassName);
-		}
-		
-		private static Context creaInitContext() throws NamingException {
-			Properties props=new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
+    public static void main(String[] args) throws NamingException {
+        FirstBeanRemote fb=EJBContextFactory.retBean("ejb:");
+        System.out.println("********"+fb.myMetha());
+    }
+    
+    private static class EJBContextFactory{
+        
+        private static FirstBeanRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
+        
+        private static FirstBeanRemote retLookUp(String namespace) throws NamingException {
+            Context ctx=creaInitContext();
+            String appName="";
+            String moduleName="UnisysFirstProj";
+            String distinctName="";
+            String beanName=FirstBean.class.getSimpleName();
+            String ViewClassName=FirstBeanRemote.class.getName();
+            return (FirstBeanRemote)ctx.lookup(namespace+appName+"/"+moduleName+"/"+distinctName+"/"+beanName+"!"+ViewClassName);
+        }
+        
+        private static Context creaInitContext() throws NamingException {
+            Properties props=new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
 
 }
 ////
     jndiProperties.put(Context.SECURITY_PRINCIPAL, "admin");
-		jndiProperties.put(Context.SECURITY_CREDENTIALS, "Satish@123");
+        jndiProperties.put(Context.SECURITY_CREDENTIALS, "Satish@123");
 /////
 guest=guest
 jmsuser=guest
@@ -2326,32 +2373,32 @@ INFO: WFNAM00025: org.jboss.naming.remote.client.InitialContextFactory is deprec
 May 15, 2024 5:15:47 AM org.wildfly.naming.client.Version <clinit>
 INFO: WildFly Naming version 1.0.7.Final-redhat-1
 Exception in thread "main" java.lang.ExceptionInInitializerError
-	at org.wildfly.security.auth.client.AuthenticationConfiguration.<clinit>(AuthenticationConfiguration.java:166)
-	at org.wildfly.naming.client.ProviderEnvironment$Builder.populateFromEnvironment(ProviderEnvironment.java:329)
-	at org.wildfly.naming.client.WildFlyRootContext.<init>(WildFlyRootContext.java:114)
-	at org.wildfly.naming.client.WildFlyRootContext.<init>(WildFlyRootContext.java:89)
-	at org.wildfly.naming.client.WildFlyRootContext.<init>(WildFlyRootContext.java:79)
-	at org.wildfly.naming.client.WildFlyInitialContextFactory.getInitialContext(WildFlyInitialContextFactory.java:54)
-	at org.jboss.naming.remote.client.InitialContextFactory.getInitialContext(InitialContextFactory.java:64)
-	at java.naming/javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:732)
-	at java.naming/javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:305)
-	at java.naming/javax.naming.InitialContext.init(InitialContext.java:236)
-	at java.naming/javax.naming.InitialContext.<init>(InitialContext.java:208)
-	at com.sat.ejb.clienta.FirstClient$EJBContextFactory.creaInitContext(FirstClient.java:44)
-	at com.sat.ejb.clienta.FirstClient$EJBContextFactory.retLookUp(FirstClient.java:27)
-	at com.sat.ejb.clienta.FirstClient$EJBContextFactory.retBean(FirstClient.java:23)
-	at com.sat.ejb.clienta.FirstClient$EJBContextFactory.access$0(FirstClient.java:22)
-	at com.sat.ejb.clienta.FirstClient.main(FirstClient.java:15)
+    at org.wildfly.security.auth.client.AuthenticationConfiguration.<clinit>(AuthenticationConfiguration.java:166)
+    at org.wildfly.naming.client.ProviderEnvironment$Builder.populateFromEnvironment(ProviderEnvironment.java:329)
+    at org.wildfly.naming.client.WildFlyRootContext.<init>(WildFlyRootContext.java:114)
+    at org.wildfly.naming.client.WildFlyRootContext.<init>(WildFlyRootContext.java:89)
+    at org.wildfly.naming.client.WildFlyRootContext.<init>(WildFlyRootContext.java:79)
+    at org.wildfly.naming.client.WildFlyInitialContextFactory.getInitialContext(WildFlyInitialContextFactory.java:54)
+    at org.jboss.naming.remote.client.InitialContextFactory.getInitialContext(InitialContextFactory.java:64)
+    at java.naming/javax.naming.spi.NamingManager.getInitialContext(NamingManager.java:732)
+    at java.naming/javax.naming.InitialContext.getDefaultInitCtx(InitialContext.java:305)
+    at java.naming/javax.naming.InitialContext.init(InitialContext.java:236)
+    at java.naming/javax.naming.InitialContext.<init>(InitialContext.java:208)
+    at com.sat.ejb.clienta.FirstClient$EJBContextFactory.creaInitContext(FirstClient.java:44)
+    at com.sat.ejb.clienta.FirstClient$EJBContextFactory.retLookUp(FirstClient.java:27)
+    at com.sat.ejb.clienta.FirstClient$EJBContextFactory.retBean(FirstClient.java:23)
+    at com.sat.ejb.clienta.FirstClient$EJBContextFactory.access$0(FirstClient.java:22)
+    at com.sat.ejb.clienta.FirstClient.main(FirstClient.java:15)
 Caused by: java.lang.reflect.InaccessibleObjectException: Unable to make field private java.security.ProtectionDomain[] java.security.AccessControlContext.context accessible: module java.base does not "opens java.security" to unnamed module @1efee8e7
-	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
-	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
-	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
-	at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
-	at org.wildfly.security.manager.GetAccessibleDeclaredFieldAction.run(GetAccessibleDeclaredFieldAction.java:52)
-	at org.wildfly.security.manager.GetAccessibleDeclaredFieldAction.run(GetAccessibleDeclaredFieldAction.java:30)
-	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318)
-	at org.wildfly.security.manager.WildFlySecurityManager.<clinit>(WildFlySecurityManager.java:109)
-	... 16 more
+    at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+    at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+    at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
+    at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
+    at org.wildfly.security.manager.GetAccessibleDeclaredFieldAction.run(GetAccessibleDeclaredFieldAction.java:52)
+    at org.wildfly.security.manager.GetAccessibleDeclaredFieldAction.run(GetAccessibleDeclaredFieldAction.java:30)
+    at java.base/java.security.AccessController.doPrivileged(AccessController.java:318)
+    at org.wildfly.security.manager.WildFlySecurityManager.<clinit>(WildFlySecurityManager.java:109)
+    ... 16 more
 
 
 
@@ -2374,11 +2421,11 @@ public class FirstBean implements FirstBeanRemote {
         // TODO Auto-generated constructor stub
     }
 
-	@Override
-	public String myMetha() {
-		// TODO Auto-generated method stub
-		return "Welcome to EJB";
-	}
+    @Override
+    public String myMetha() {
+        // TODO Auto-generated method stub
+        return "Welcome to EJB";
+    }
 
 }
 
@@ -2392,7 +2439,7 @@ import javax.ejb.Remote;
 
 @Remote
 public interface FirstBeanRemote {
-	public String myMetha();
+    public String myMetha();
 }
 
 
@@ -2405,7 +2452,7 @@ import javax.ejb.Remote;
 
 @Remote
 public interface SecBeanRemote {
-	public String retCaps(String c);
+    public String retCaps(String c);
 }
 /////
 package com.satejb.ser;
@@ -2422,10 +2469,10 @@ public class SecBean implements SecBeanRemote {
     public SecBean() {
     }
 
-	@Override
-	public String retCaps(String c) {
-		return c.toUpperCase();
-	}    
+    @Override
+    public String retCaps(String c) {
+        return c.toUpperCase();
+    }    
 }
 /////
 package com.satejb.client;
@@ -2441,37 +2488,37 @@ import com.satejb.ser.SecBeanRemote;
 
 public class MnClsA {
 
-	public static void main(String[] args) throws NamingException {
-		SecBeanRemote sc=EJBContextFactory.retBean("ejb:");
-		String u=sc.retCaps("satish");
-		System.out.println(u);
-	}
-	
-	
-	private static class EJBContextFactory{
-		private static SecBeanRemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
-		
-		private static SecBeanRemote retLookUp(String namespace) throws NamingException {
-			Context ctx=creaInitContext();
-			String appName="";
-			String moduleName="UnisysSecProj";
-			String distinctName="";
-			String beanName=SecBean.class.getSimpleName();
-			String viewClassName=SecBeanRemote.class.getName();
-			return (SecBeanRemote)ctx.lookup(namespace+appName+"/"+moduleName+"/"+distinctName+"/"+beanName+"!"+viewClassName);
-		}
-		
-		private static Context creaInitContext() throws NamingException {
-			Properties props=new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
+    public static void main(String[] args) throws NamingException {
+        SecBeanRemote sc=EJBContextFactory.retBean("ejb:");
+        String u=sc.retCaps("satish");
+        System.out.println(u);
+    }
+    
+    
+    private static class EJBContextFactory{
+        private static SecBeanRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
+        
+        private static SecBeanRemote retLookUp(String namespace) throws NamingException {
+            Context ctx=creaInitContext();
+            String appName="";
+            String moduleName="UnisysSecProj";
+            String distinctName="";
+            String beanName=SecBean.class.getSimpleName();
+            String viewClassName=SecBeanRemote.class.getName();
+            return (SecBeanRemote)ctx.lookup(namespace+appName+"/"+moduleName+"/"+distinctName+"/"+beanName+"!"+viewClassName);
+        }
+        
+        private static Context creaInitContext() throws NamingException {
+            Properties props=new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
 }
 //////
 https://www.transfernow.net/en
@@ -2490,10 +2537,10 @@ public class MyBean implements MyBeanRemote {
     public MyBean() {
     }
 
-	@Override
-	public String myTest() {
-		return "Radha Krishna";
-	}
+    @Override
+    public String myTest() {
+        return "Radha Krishna";
+    }
 
 }
 /////
@@ -2517,7 +2564,7 @@ import c.ser.cls.MyBean;
  */
 @WebServlet("/NServe")
 public class NServe extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
        
 
     /**
@@ -2528,22 +2575,22 @@ public class NServe extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		PrintWriter out=response.getWriter();
-		out.println("Running the client");
-	}
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        PrintWriter out=response.getWriter();
+        out.println("Running the client");
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
 
 }
 ////
@@ -2559,38 +2606,38 @@ import c.ser.cls.MyBean;
 import c.ser.cls.MyBeanRemote;
 
 public class ClsEjb {
-	public static void main(String[] args) throws NamingException {
-		MyBeanRemote sc=EJBContextFactory.retBean("ejb:");
-		String u=sc.myTest();
-		System.out.println(u);
-	}
-	
-	
-	
-	private static class EJBContextFactory{
-		private static MyBeanRemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
-		
-		private static MyBeanRemote retLookUp(String namespace) throws NamingException {
-			Context ctx=creaInitContext();
-			String appName="";
-			String moduleName="UnisysThirdProj";
-			String distinctName="";
-			String beanName=MyBean.class.getSimpleName();
-			String viewClassName=MyBeanRemote.class.getName();
-			return (MyBeanRemote)ctx.lookup(namespace+appName+"/"+moduleName+"/"+distinctName+"/"+beanName+"!"+viewClassName);
-		}
-		
-		private static Context creaInitContext() throws NamingException {
-			Properties props=new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
+    public static void main(String[] args) throws NamingException {
+        MyBeanRemote sc=EJBContextFactory.retBean("ejb:");
+        String u=sc.myTest();
+        System.out.println(u);
+    }
+    
+    
+    
+    private static class EJBContextFactory{
+        private static MyBeanRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
+        
+        private static MyBeanRemote retLookUp(String namespace) throws NamingException {
+            Context ctx=creaInitContext();
+            String appName="";
+            String moduleName="UnisysThirdProj";
+            String distinctName="";
+            String beanName=MyBean.class.getSimpleName();
+            String viewClassName=MyBeanRemote.class.getName();
+            return (MyBeanRemote)ctx.lookup(namespace+appName+"/"+moduleName+"/"+distinctName+"/"+beanName+"!"+viewClassName);
+        }
+        
+        private static Context creaInitContext() throws NamingException {
+            Properties props=new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
 }
 /////
 package a.b.c;
@@ -2608,46 +2655,46 @@ import c.ser.cls.MyBean;
 import c.ser.cls.MyBeanRemote;
 
 public class MyFrame extends JFrame {
-	public MyFrame() {
-		Container cnt = getContentPane();
-		JLabel lab = new JLabel();
-		MyBeanRemote sc;
-		try {
-			sc = EJBContextFactory.retBean("ejb:");
-			String u = sc.myTest();
-			lab.setText(u);
-			cnt.add(lab);
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
+    public MyFrame() {
+        Container cnt = getContentPane();
+        JLabel lab = new JLabel();
+        MyBeanRemote sc;
+        try {
+            sc = EJBContextFactory.retBean("ejb:");
+            String u = sc.myTest();
+            lab.setText(u);
+            cnt.add(lab);
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
 
-	}
+    }
 
-	private static class EJBContextFactory {
-		private static MyBeanRemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
+    private static class EJBContextFactory {
+        private static MyBeanRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
 
-		private static MyBeanRemote retLookUp(String namespace) throws NamingException {
-			Context ctx = creaInitContext();
-			String appName = "";
-			String moduleName = "UnisysThirdProj";
-			String distinctName = "";
-			String beanName = MyBean.class.getSimpleName();
-			String viewClassName = MyBeanRemote.class.getName();
-			return (MyBeanRemote) ctx.lookup(
-					namespace + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
-		}
+        private static MyBeanRemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysThirdProj";
+            String distinctName = "";
+            String beanName = MyBean.class.getSimpleName();
+            String viewClassName = MyBeanRemote.class.getName();
+            return (MyBeanRemote) ctx.lookup(
+                    namespace + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+        }
 
-		private static Context creaInitContext() throws NamingException {
-			Properties props = new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
 }
 /////
 package a.b.c;
@@ -2663,13 +2710,13 @@ import c.ser.cls.MyBean;
 import c.ser.cls.MyBeanRemote;
 
 public class ClsEjb {
-	public static void main(String[] args) throws NamingException {
-		MyFrame frame=new MyFrame();
-		frame.setDefaultCloseOperation(2);
-		frame.setVisible(true);
-		frame.setSize(150, 150);
-		frame.setLayout(new FlowLayout());
-	}	
+    public static void main(String[] args) throws NamingException {
+        MyFrame frame=new MyFrame();
+        frame.setDefaultCloseOperation(2);
+        frame.setVisible(true);
+        frame.setSize(150, 150);
+        frame.setLayout(new FlowLayout());
+    }	
 }
 //////
 /subsystem=security/security-domain=other/authentication=classic/login-module=RealmDirect:map-put(name=module-options,key=unauthenticatedIdentity,value=guest)
@@ -2688,37 +2735,37 @@ import com.sat.ejbse.CBeanRemote;
 
 public class MnCls {
 
-	public static void main(String[] args) throws NamingException {
-		CBeanRemote cr=EJBContextFactory.retBean("ejb:");
-		System.out.println(cr.retRev("Satish"));
+    public static void main(String[] args) throws NamingException {
+        CBeanRemote cr=EJBContextFactory.retBean("ejb:");
+        System.out.println(cr.retRev("Satish"));
 System.out.println(cr.retRoot(21));
-		
-	}
-	private static class EJBContextFactory {
-		private static CBeanRemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
+        
+    }
+    private static class EJBContextFactory {
+        private static CBeanRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
 
-		private static CBeanRemote retLookUp(String namespace) throws NamingException {
-			Context ctx = creaInitContext();
-			String appName = "";
-			String moduleName = "UnisysFourthProj";
-			String distinctName = "";
-			String beanName = CBean.class.getSimpleName();
-			String viewClassName = CBeanRemote.class.getName();
-			return (CBeanRemote) ctx.lookup(
-					namespace + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
-		}
+        private static CBeanRemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysFourthProj";
+            String distinctName = "";
+            String beanName = CBean.class.getSimpleName();
+            String viewClassName = CBeanRemote.class.getName();
+            return (CBeanRemote) ctx.lookup(
+                    namespace + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+        }
 
-		private static Context creaInitContext() throws NamingException {
-			Properties props = new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
 }
 
 
@@ -2729,8 +2776,8 @@ import javax.ejb.Remote;
 
 @Remote
 public interface CBeanRemote {
-	public String retRev(String b);
-	public double retRoot(int i);
+    public String retRev(String b);
+    public double retRoot(int i);
 }
 //////
 package com.sat.ejbse;
@@ -2746,17 +2793,17 @@ public class CBean implements CBeanRemote {
     public CBean() {
     }
 
-	@Override
-	public String retRev(String b) {
-		StringBuffer buf=new StringBuffer(b);
-		String j=buf.reverse().toString();
-		return j;
-	}
+    @Override
+    public String retRev(String b) {
+        StringBuffer buf=new StringBuffer(b);
+        String j=buf.reverse().toString();
+        return j;
+    }
 
-	@Override
-	public double retRoot(int i) {
-		return Math.sqrt(i);
-	}
+    @Override
+    public double retRoot(int i) {
+        return Math.sqrt(i);
+    }
 }
 /////
 package pp.qq.rr;
@@ -2780,56 +2827,56 @@ import com.sat.ejbse.CBeanRemote;
 
 public class MyFrame extends JFrame {
 
-	public MyFrame() throws NamingException {
-		Container cont=getContentPane();
-		Vector vec=new Vector();
-		CBeanRemote cr=EJBContextFactory.retBean("ejb:");
-		for (int i = 1; i < 101; i++) {
-			vec.add(cr.retRoot(i));
-		}
-		JComboBox box=new JComboBox(vec);
-		cont.add(box);
-	}
-	
-	private static class EJBContextFactory {
-		private static CBeanRemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
+    public MyFrame() throws NamingException {
+        Container cont=getContentPane();
+        Vector vec=new Vector();
+        CBeanRemote cr=EJBContextFactory.retBean("ejb:");
+        for (int i = 1; i < 101; i++) {
+            vec.add(cr.retRoot(i));
+        }
+        JComboBox box=new JComboBox(vec);
+        cont.add(box);
+    }
+    
+    private static class EJBContextFactory {
+        private static CBeanRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
 
-		private static CBeanRemote retLookUp(String namespace) throws NamingException {
-			Context ctx = creaInitContext();
-			String appName = "";
-			String moduleName = "UnisysFourthProj";
-			String distinctName = "";
-			String beanName = CBean.class.getSimpleName();
-			String viewClassName = CBeanRemote.class.getName();
-			return (CBeanRemote) ctx.lookup(
-					namespace + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
-		}
+        private static CBeanRemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysFourthProj";
+            String distinctName = "";
+            String beanName = CBean.class.getSimpleName();
+            String viewClassName = CBeanRemote.class.getName();
+            return (CBeanRemote) ctx.lookup(
+                    namespace + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+        }
 
-		private static Context creaInitContext() throws NamingException {
-			Properties props = new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
-	
-	
-	
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
+    
+    
+    
 }
 
 /////
 public static void main(String[] args) throws NamingException {
-		MyFrame frame=new MyFrame();
-		frame.setDefaultCloseOperation(2);
-		frame.setVisible(true);
-		frame.setSize(1000,1000);
-		frame.setLayout(new FlowLayout());
-		
-		//		CBeanRemote cr=EJBContextFactory.retBean("ejb:");
+        MyFrame frame=new MyFrame();
+        frame.setDefaultCloseOperation(2);
+        frame.setVisible(true);
+        frame.setSize(1000,1000);
+        frame.setLayout(new FlowLayout());
+        
+        //		CBeanRemote cr=EJBContextFactory.retBean("ejb:");
 //		System.out.println(cr.retRev("Satish"));
 //		System.out.println(cr.retRoot(21));
 //		int a=0;
@@ -2838,7 +2885,7 @@ public static void main(String[] args) throws NamingException {
 //		a=scan.nextInt();
 //		System.out.println(cr.retSumTill(a));
 //		
-	}
+    }
 
 //////servlet.txt////
 Servlet is a java program that runs inside JVM on the web server. It is used for developing dynamic web applications.
@@ -2898,8 +2945,8 @@ import javax.ejb.Remote;
 
 @Remote
 public interface FileBeanARemote {
-	public String retContents();
-	public String retBook();
+    public String retContents();
+    public String retBook();
 }
 
 /////
@@ -2919,37 +2966,37 @@ import javax.ejb.Stateless;
 @Stateless
 @LocalBean
 public class FileBeanA implements FileBeanARemote {
-	private final String fname="C:\\DelhiOfficeFiles\\ServletNotes.txt";
+    private final String fname="C:\\DelhiOfficeFiles\\ServletNotes.txt";
     public FileBeanA() {
     }
 
-	@Override
-	public String retContents() {
-		File f=new File(fname);
-		String fCont="";
-		try {
-			FileInputStream fis=new FileInputStream(f);
-			int i=0;
-			while((i=fis.read())!=-1) {
-				fCont+=(char)i;
-			}
-			fis.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return fCont;
-	}
+    @Override
+    public String retContents() {
+        File f=new File(fname);
+        String fCont="";
+        try {
+            FileInputStream fis=new FileInputStream(f);
+            int i=0;
+            while((i=fis.read())!=-1) {
+                fCont+=(char)i;
+            }
+            fis.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return fCont;
+    }
 
-	@Override
-	public String retBook() {
-		Books b=new Books();
-		b.setBid(1223);
-		b.setBname("Meghasandesam");
-		b.setBauth("Mahakavi Kalidasa");
-		return b.getBid()+" "+b.getBname()+" "+b.getBauth();
-	}
+    @Override
+    public String retBook() {
+        Books b=new Books();
+        b.setBid(1223);
+        b.setBname("Meghasandesam");
+        b.setBauth("Mahakavi Kalidasa");
+        return b.getBid()+" "+b.getBname()+" "+b.getBauth();
+    }
 
 }
 //////
@@ -2968,67 +3015,67 @@ import com.sat.serva.FileBeanARemote;
 
 public class MnClsClient {
 
-	public static void main(String[] args) throws NamingException {
-		FileBeanARemote fa=EJBContextFactory.retBean("ejb:");
-		String u=fa.retContents();
-		System.err.println(u);
-		String b=fa.retBook();
-		System.out.println(b);
-	}
-	
-	private static class EJBContextFactory {
-		private static FileBeanARemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
+    public static void main(String[] args) throws NamingException {
+        FileBeanARemote fa=EJBContextFactory.retBean("ejb:");
+        String u=fa.retContents();
+        System.err.println(u);
+        String b=fa.retBook();
+        System.out.println(b);
+    }
+    
+    private static class EJBContextFactory {
+        private static FileBeanARemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
 
-		private static FileBeanARemote retLookUp(String namespace) throws NamingException {
-			Context ctx = creaInitContext();
-			String appName = "";
-			String moduleName = "UnisysFifthProj";
-			String distinctName = "";
-			String beanName = FileBeanA.class.getSimpleName();
-			String viewClassName = FileBeanARemote.class.getName();
-			return (FileBeanARemote) ctx.lookup(
-					namespace + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
-		}
+        private static FileBeanARemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysFifthProj";
+            String distinctName = "";
+            String beanName = FileBeanA.class.getSimpleName();
+            String viewClassName = FileBeanARemote.class.getName();
+            return (FileBeanARemote) ctx.lookup(
+                    namespace + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+        }
 
-		private static Context creaInitContext() throws NamingException {
-			Properties props = new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
-	
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
+    
 
 }
 //////
 package com.sat.serva;
 
 public class Books {
-	private int bid;
-	public int getBid() {
-		return bid;
-	}
-	public void setBid(int bid) {
-		this.bid = bid;
-	}
-	public String getBname() {
-		return bname;
-	}
-	public void setBname(String bname) {
-		this.bname = bname;
-	}
-	public String getBauth() {
-		return bauth;
-	}
-	public void setBauth(String bauth) {
-		this.bauth = bauth;
-	}
-	private String bname;
-	private String bauth;
+    private int bid;
+    public int getBid() {
+        return bid;
+    }
+    public void setBid(int bid) {
+        this.bid = bid;
+    }
+    public String getBname() {
+        return bname;
+    }
+    public void setBname(String bname) {
+        this.bname = bname;
+    }
+    public String getBauth() {
+        return bauth;
+    }
+    public void setBauth(String bauth) {
+        this.bauth = bauth;
+    }
+    private String bname;
+    private String bauth;
 }
 /////
 <module xmlns="urn:jboss:module:1.1" name="com.mysql">
@@ -3072,7 +3119,7 @@ import javax.ejb.Remote;
 
 @Remote
 public interface MySBeanRemote {
-	public String retSecLetterCaps(String a);
+    public String retSecLetterCaps(String a);
 }
 ////
 package com.sata.serve;
@@ -3089,21 +3136,21 @@ public class MySBean implements MySBeanRemote {
     public MySBean() {
     }
 
-	@Override
-	public String retSecLetterCaps(String a) {
-		char[] arr=a.toCharArray();
-		String u="";
-		int i=1;
-		for(char c:arr) {
-			if(i%2==0) {
-				u+=String.valueOf(c).toUpperCase();
-			}else {
-				u+=String.valueOf(c);
-			}
-			i++;
-		}
-		return u;
-	}
+    @Override
+    public String retSecLetterCaps(String a) {
+        char[] arr=a.toCharArray();
+        String u="";
+        int i=1;
+        for(char c:arr) {
+            if(i%2==0) {
+                u+=String.valueOf(c).toUpperCase();
+            }else {
+                u+=String.valueOf(c);
+            }
+            i++;
+        }
+        return u;
+    }
 }
 
 
@@ -3120,37 +3167,37 @@ import com.sata.serve.MySBean;
 import com.sata.serve.MySBeanRemote;
 
 public class MainCls {
-	public static void main(String[] args) throws NamingException {
-		MySBeanRemote msb=EJBContext.retBean("ejb:");
-		String j=msb.retSecLetterCaps("this is rather a long string to be a part of parameter");
-		System.out.println(j);
-	}
+    public static void main(String[] args) throws NamingException {
+        MySBeanRemote msb=EJBContext.retBean("ejb:");
+        String j=msb.retSecLetterCaps("this is rather a long string to be a part of parameter");
+        System.out.println(j);
+    }
 
-	private static class EJBContext {
-		private static MySBeanRemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
+    private static class EJBContext {
+        private static MySBeanRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
 
-		private static MySBeanRemote retLookUp(String namespace) throws NamingException {
-			Context ctx = creaInitContext();
-			String appName = "";
-			String moduleName = "UnisysSixthProj";
-			String distinctName = "";
-			String beanName = MySBean.class.getSimpleName();
-			String viewClassName = MySBeanRemote.class.getName();
-			return (MySBeanRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
-					+ beanName + "!" + viewClassName + "?stateful");
-		}
+        private static MySBeanRemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysSixthProj";
+            String distinctName = "";
+            String beanName = MySBean.class.getSimpleName();
+            String viewClassName = MySBeanRemote.class.getName();
+            return (MySBeanRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
+                    + beanName + "!" + viewClassName + "?stateful");
+        }
 
-		private static Context creaInitContext() throws NamingException {
-			Properties props = new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
 }
 //////
 
@@ -3161,7 +3208,7 @@ Bound data source [java:jboss/MySqlDS]
 package com.satb.serve;
 
 public interface IVals {
-	public static final String fname="C:\\DelhiOfficeFiles\\unisysdata.txt";
+    public static final String fname="C:\\DelhiOfficeFiles\\unisysdata.txt";
 }
 
 ////
@@ -3171,7 +3218,7 @@ import javax.ejb.Remote;
 
 @Remote
 public interface ABeanStateRemote {
-	public String wrFile(String conts);
+    public String wrFile(String conts);
 }
 /////
 package com.satb.serve;
@@ -3191,46 +3238,46 @@ public class ABeanState implements ABeanStateRemote,IVals {
     public ABeanState() {
     }
 
-	@Override
-	public String wrFile(String conts) {
-		File f=new File(fname);
-		String status="not done";
-		try {
-			FileOutputStream fos=new FileOutputStream(f,true);
-			fos.write(conts.getBytes());
-			fos.flush();
-			fos.close();
-			status="done";
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}		
-		return status;
-	}
+    @Override
+    public String wrFile(String conts) {
+        File f=new File(fname);
+        String status="not done";
+        try {
+            FileOutputStream fos=new FileOutputStream(f,true);
+            fos.write(conts.getBytes());
+            fos.flush();
+            fos.close();
+            status="done";
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }		
+        return status;
+    }
 }
 ////
 String[] strs=new String[] {"Physics","Nuclear Physics","Geo Physics"};
-		System.out.println(Arrays.deepToString(strs));
+        System.out.println(Arrays.deepToString(strs));
 //////
 package co.sa.clia;
 
 public class Person {
-	private String pname;
-	private String pemail;
-	private String pmobile;
-	public Person() {
-	}
-	public Person(String a,String b,String c) {
-		this.pname=a;
-		this.pemail=b;
-		this.pmobile=c;
-	}
-	@Override
-	public String toString() {
-		String fin=String.format("Name:%s Email: %s Mobile:%s", this.pname,this.pemail,this.pmobile);
-		return fin;
-	}
+    private String pname;
+    private String pemail;
+    private String pmobile;
+    public Person() {
+    }
+    public Person(String a,String b,String c) {
+        this.pname=a;
+        this.pemail=b;
+        this.pmobile=c;
+    }
+    @Override
+    public String toString() {
+        String fin=String.format("Name:%s Email: %s Mobile:%s", this.pname,this.pemail,this.pmobile);
+        return fin;
+    }
 }
 /////
 package co.sa.clia;
@@ -3248,51 +3295,51 @@ import com.satb.serve.ABeanStateRemote;
 
 public class MnClsA {
 
-	public static void main(String[] args) throws NamingException {
-		Person[] pArr=new Person[5];
-		Scanner scan=new Scanner(System.in);
-		int i=0;
-		while(i<5) {
-			System.out.println("Enter the name of the person");
-			String name=scan.nextLine();
-			System.out.println("Enter the email of the person");
-			String email=scan.nextLine();
-			System.out.println("Enter the mobile of the person");
-			String mobile=scan.nextLine();
-			Person pObj=new Person(name, email, mobile);
-			pArr[i]=pObj;
-			i++;
-		}
-		String resp=Arrays.deepToString(pArr);
-		ABeanStateRemote abs=EJBContext.retBean("ejb:");
-		abs.wrFile(resp);
-	}
-	
-	private static class EJBContext{
-		private static ABeanStateRemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
+    public static void main(String[] args) throws NamingException {
+        Person[] pArr=new Person[5];
+        Scanner scan=new Scanner(System.in);
+        int i=0;
+        while(i<5) {
+            System.out.println("Enter the name of the person");
+            String name=scan.nextLine();
+            System.out.println("Enter the email of the person");
+            String email=scan.nextLine();
+            System.out.println("Enter the mobile of the person");
+            String mobile=scan.nextLine();
+            Person pObj=new Person(name, email, mobile);
+            pArr[i]=pObj;
+            i++;
+        }
+        String resp=Arrays.deepToString(pArr);
+        ABeanStateRemote abs=EJBContext.retBean("ejb:");
+        abs.wrFile(resp);
+    }
+    
+    private static class EJBContext{
+        private static ABeanStateRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
 
-		private static ABeanStateRemote retLookUp(String namespace) throws NamingException {
-			Context ctx = creaInitContext();
-			String appName = "";
-			String moduleName = "UnisysSeventhProj";
-			String distinctName = "";
-			String beanName = ABeanState.class.getSimpleName();
-			String viewClassName = ABeanStateRemote.class.getName();
-			return (ABeanStateRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
-					+ beanName + "!" + viewClassName + "?stateful");
-		}
+        private static ABeanStateRemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysSeventhProj";
+            String distinctName = "";
+            String beanName = ABeanState.class.getSimpleName();
+            String viewClassName = ABeanStateRemote.class.getName();
+            return (ABeanStateRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
+                    + beanName + "!" + viewClassName + "?stateful");
+        }
 
-		private static Context creaInitContext() throws NamingException {
-			Properties props = new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
 }
 /////
 create table persons(id int primary key,name varchar(50),dept varchar(50));
@@ -3305,7 +3352,7 @@ import javax.ejb.Remote;
 
 @Remote
 public interface DbBeanARemote {
-		public String retConts();
+        public String retConts();
 }
 //////
 package com.sat.serveb;
@@ -3330,25 +3377,25 @@ public class DbBeanA implements DbBeanARemote {
     public DbBeanA() {
     }
 
-	@Override
-	public String retConts() {
-		String res="";
-		try {
-			DataSource ds=(DataSource)(new InitialContext().lookup("java:jboss/MySqlDS"));
-			Connection conn=ds.getConnection();
-			Statement st=conn.createStatement();
-			ResultSet rs=st.executeQuery("select * from persons");
-			
-			while(rs.next()) {
-				res+=rs.getInt(1)+"-"+rs.getString(2)+"-"+rs.getString(3)+";";
-			}
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return res;
-	}
+    @Override
+    public String retConts() {
+        String res="";
+        try {
+            DataSource ds=(DataSource)(new InitialContext().lookup("java:jboss/MySqlDS"));
+            Connection conn=ds.getConnection();
+            Statement st=conn.createStatement();
+            ResultSet rs=st.executeQuery("select * from persons");
+            
+            while(rs.next()) {
+                res+=rs.getInt(1)+"-"+rs.getString(2)+"-"+rs.getString(3)+";";
+            }
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
 
     
     
@@ -3368,48 +3415,48 @@ import com.sat.serveb.DbBeanA;
 import com.sat.serveb.DbBeanARemote;
 
 public class MyClientCls {
-	public static void main(String[] args) throws NamingException {
-		DbBeanARemote dbr=EJBContext.retBean("ejb:");
-		String res=dbr.retConts();
+    public static void main(String[] args) throws NamingException {
+        DbBeanARemote dbr=EJBContext.retBean("ejb:");
+        String res=dbr.retConts();
 //		System.out.println(res);
-		StringTokenizer str=new StringTokenizer(res, ";");
-		while(str.hasMoreTokens()) {
-			String u[]=str.nextToken().toString().split("-");
-			for(String k:u) {
-				System.out.println(k);
-			}
-			System.out.println("***********************");
-			//System.out.println(str.nextToken().toString());
-		}
-	}
-	
-	private static class EJBContext{
-		private static DbBeanARemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
+        StringTokenizer str=new StringTokenizer(res, ";");
+        while(str.hasMoreTokens()) {
+            String u[]=str.nextToken().toString().split("-");
+            for(String k:u) {
+                System.out.println(k);
+            }
+            System.out.println("***********************");
+            //System.out.println(str.nextToken().toString());
+        }
+    }
+    
+    private static class EJBContext{
+        private static DbBeanARemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
 
-		private static DbBeanARemote retLookUp(String namespace) throws NamingException {
-			Context ctx = creaInitContext();
-			String appName = "";
-			String moduleName = "UnisysEighthProj";
-			String distinctName = "";
-			String beanName = DbBeanA.class.getSimpleName();
-			String viewClassName = DbBeanARemote.class.getName();
-			return (DbBeanARemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
-					+ beanName + "!" + viewClassName + "?stateful");
-		}
+        private static DbBeanARemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysEighthProj";
+            String distinctName = "";
+            String beanName = DbBeanA.class.getSimpleName();
+            String viewClassName = DbBeanARemote.class.getName();
+            return (DbBeanARemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
+                    + beanName + "!" + viewClassName + "?stateful");
+        }
 
-		private static Context creaInitContext() throws NamingException {
-			Properties props = new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
-	
-	
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
+    
+    
 }
 
 //////
@@ -3990,10 +4037,10 @@ import javax.ejb.Remote;
 
 @Remote
 public interface DbBeanARemote {
-		public String retConts();
-		public String insPerson(int a,String b,String c);
-		public String upPerson(int a,String b,String c);
-		public String delPerson(int a);
+        public String retConts();
+        public String insPerson(int a,String b,String c);
+        public String upPerson(int a,String b,String c);
+        public String delPerson(int a);
 }
 /////
 package com.sat.serveb;
@@ -4015,82 +4062,82 @@ public class DbBeanA implements DbBeanARemote {
 
    
     
-	@Override
-	public String retConts() {
-		String res="";
-		try {
-			 DataSource ds=(DataSource)(new InitialContext().lookup("java:jboss/MySqlDS"));
-			Connection conn=ds.getConnection();
-			Statement st=conn.createStatement();
-			ResultSet rs=st.executeQuery("select * from persons");
-			while(rs.next()) {
-				res+=rs.getInt(1)+"-"+rs.getString(2)+"-"+rs.getString(3)+";";
-			}
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return res;
-	}
+    @Override
+    public String retConts() {
+        String res="";
+        try {
+             DataSource ds=(DataSource)(new InitialContext().lookup("java:jboss/MySqlDS"));
+            Connection conn=ds.getConnection();
+            Statement st=conn.createStatement();
+            ResultSet rs=st.executeQuery("select * from persons");
+            while(rs.next()) {
+                res+=rs.getInt(1)+"-"+rs.getString(2)+"-"+rs.getString(3)+";";
+            }
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
 
-	@Override
-	public String insPerson(int a, String b, String c) {
-		String status="Not Done";
-		 try {
-			DataSource ds=(DataSource)(new InitialContext().lookup("java:jboss/MySqlDS"));
-			Connection conn=ds.getConnection();
-			PreparedStatement ps=conn.prepareStatement("insert into persons values(?,?,?)");
-			ps.setInt(1, a);
-			ps.setString(2, b);
-			ps.setString(3, c);
-			ps.execute();
-			status="Done";
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return status;
-	}
+    @Override
+    public String insPerson(int a, String b, String c) {
+        String status="Not Done";
+         try {
+            DataSource ds=(DataSource)(new InitialContext().lookup("java:jboss/MySqlDS"));
+            Connection conn=ds.getConnection();
+            PreparedStatement ps=conn.prepareStatement("insert into persons values(?,?,?)");
+            ps.setInt(1, a);
+            ps.setString(2, b);
+            ps.setString(3, c);
+            ps.execute();
+            status="Done";
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
 
-	@Override
-	public String upPerson(int a, String b, String c) {
-		String status="Not Done";
-		 try {
-			DataSource ds=(DataSource)(new InitialContext().lookup("java:jboss/MySqlDS"));
-			Connection conn=ds.getConnection();
-			PreparedStatement ps=conn.prepareStatement("update persons set name=?,dept=? where id=?");
-			ps.setString(1, b);
-			ps.setString(2, c);	
-			ps.setInt(3, a);
-			ps.executeUpdate();
-			status="Done";
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return status;
-	}
+    @Override
+    public String upPerson(int a, String b, String c) {
+        String status="Not Done";
+         try {
+            DataSource ds=(DataSource)(new InitialContext().lookup("java:jboss/MySqlDS"));
+            Connection conn=ds.getConnection();
+            PreparedStatement ps=conn.prepareStatement("update persons set name=?,dept=? where id=?");
+            ps.setString(1, b);
+            ps.setString(2, c);	
+            ps.setInt(3, a);
+            ps.executeUpdate();
+            status="Done";
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
 
-	@Override
-	public String delPerson(int a) {
-		String status="Not Done";
-		 try {
-			DataSource ds=(DataSource)(new InitialContext().lookup("java:jboss/MySqlDS"));
-			Connection conn=ds.getConnection();
-			PreparedStatement ps=conn.prepareStatement("delete from persons where id=?");
-			ps.setInt(1, a);
-			ps.executeUpdate();
-			status="Done";
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return status;
-	} 
+    @Override
+    public String delPerson(int a) {
+        String status="Not Done";
+         try {
+            DataSource ds=(DataSource)(new InitialContext().lookup("java:jboss/MySqlDS"));
+            Connection conn=ds.getConnection();
+            PreparedStatement ps=conn.prepareStatement("delete from persons where id=?");
+            ps.setInt(1, a);
+            ps.executeUpdate();
+            status="Done";
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    } 
 }
 /////
 package co.sa.da.cli;
@@ -4107,78 +4154,78 @@ import com.sat.serveb.DbBeanA;
 import com.sat.serveb.DbBeanARemote;
 
 public class MyClientCls {
-	public static void main(String[] args) throws NamingException {
-		DbBeanARemote dbr = EJBContext.retBean("ejb:");
-		String res = dbr.retConts();
+    public static void main(String[] args) throws NamingException {
+        DbBeanARemote dbr = EJBContext.retBean("ejb:");
+        String res = dbr.retConts();
 //		System.out.println(res);
-		StringTokenizer str = new StringTokenizer(res, ";");
-		while (str.hasMoreTokens()) {
-			String u[] = str.nextToken().toString().split("-");
-			for (String k : u) {
-				System.out.println(k);
-			}
-			System.out.println("***********************");
-			// System.out.println(str.nextToken().toString());
-		}
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Enter \n1 for insert\n2 for update\n3 for delete");
-		int inp = Integer.parseInt(scan.nextLine());
-		switch (inp) {
-		case 1:
-			System.out.println("Enter the id of the person");
-			int a = Integer.parseInt(scan.nextLine());
-			System.out.println("Enter name of the person");
-			String b = scan.nextLine();
-			System.out.println("Enter dept of the person");
-			String c = scan.nextLine();
-			dbr.insPerson(a, b, c);
-			break;
-		case 2:
-			System.out.println("Enter the id of the person");
-			int a1 = Integer.parseInt(scan.nextLine());
-			System.out.println("Enter name of the person");
-			String b1 = scan.nextLine();
-			System.out.println("Enter dept of the person");
-			String c1 = scan.nextLine();
-			dbr.upPerson(a1, b1, c1);
-			break;
-		case 3:
-			System.out.println("Enter the id of the person");
-			int a2 = Integer.parseInt(scan.nextLine());
-			dbr.delPerson(a2);
-			break;
-		default:
-			System.out.println("Unsupported operation");
-			break;
-		}
+        StringTokenizer str = new StringTokenizer(res, ";");
+        while (str.hasMoreTokens()) {
+            String u[] = str.nextToken().toString().split("-");
+            for (String k : u) {
+                System.out.println(k);
+            }
+            System.out.println("***********************");
+            // System.out.println(str.nextToken().toString());
+        }
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter \n1 for insert\n2 for update\n3 for delete");
+        int inp = Integer.parseInt(scan.nextLine());
+        switch (inp) {
+        case 1:
+            System.out.println("Enter the id of the person");
+            int a = Integer.parseInt(scan.nextLine());
+            System.out.println("Enter name of the person");
+            String b = scan.nextLine();
+            System.out.println("Enter dept of the person");
+            String c = scan.nextLine();
+            dbr.insPerson(a, b, c);
+            break;
+        case 2:
+            System.out.println("Enter the id of the person");
+            int a1 = Integer.parseInt(scan.nextLine());
+            System.out.println("Enter name of the person");
+            String b1 = scan.nextLine();
+            System.out.println("Enter dept of the person");
+            String c1 = scan.nextLine();
+            dbr.upPerson(a1, b1, c1);
+            break;
+        case 3:
+            System.out.println("Enter the id of the person");
+            int a2 = Integer.parseInt(scan.nextLine());
+            dbr.delPerson(a2);
+            break;
+        default:
+            System.out.println("Unsupported operation");
+            break;
+        }
 
-	}
+    }
 
-	private static class EJBContext {
-		private static DbBeanARemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
+    private static class EJBContext {
+        private static DbBeanARemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
 
-		private static DbBeanARemote retLookUp(String namespace) throws NamingException {
-			Context ctx = creaInitContext();
-			String appName = "";
-			String moduleName = "UnisysEighthProj";
-			String distinctName = "";
-			String beanName = DbBeanA.class.getSimpleName();
-			String viewClassName = DbBeanARemote.class.getName();
-			return (DbBeanARemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
-					+ beanName + "!" + viewClassName + "?stateful");
-		}
+        private static DbBeanARemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysEighthProj";
+            String distinctName = "";
+            String beanName = DbBeanA.class.getSimpleName();
+            String viewClassName = DbBeanARemote.class.getName();
+            return (DbBeanARemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
+                    + beanName + "!" + viewClassName + "?stateful");
+        }
 
-		private static Context creaInitContext() throws NamingException {
-			Properties props = new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
 
 }
 //////
@@ -4196,83 +4243,83 @@ import com.sat.serveb.DbBeanA;
 import com.sat.serveb.DbBeanARemote;
 
 public class MyClientCls {
-	public static void main(String[] args) throws NamingException {
-		DbBeanARemote dbr = EJBContext.retBean("ejb:");
-		selQuery(dbr);
-		crudOpsMenu(dbr);
-	}
+    public static void main(String[] args) throws NamingException {
+        DbBeanARemote dbr = EJBContext.retBean("ejb:");
+        selQuery(dbr);
+        crudOpsMenu(dbr);
+    }
 
-	public static void selQuery(DbBeanARemote dbr) {
-		String res = dbr.retConts();
-		StringTokenizer str = new StringTokenizer(res, ";");
-		while (str.hasMoreTokens()) {
-			String u[] = str.nextToken().toString().split("-");
-			for (String k : u) {
-				System.out.println(k);
-			}
-			System.out.println("***********************");
-		}
-	}
+    public static void selQuery(DbBeanARemote dbr) {
+        String res = dbr.retConts();
+        StringTokenizer str = new StringTokenizer(res, ";");
+        while (str.hasMoreTokens()) {
+            String u[] = str.nextToken().toString().split("-");
+            for (String k : u) {
+                System.out.println(k);
+            }
+            System.out.println("***********************");
+        }
+    }
 
-	public static void crudOpsMenu(DbBeanARemote dbr) {
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Enter \n1 for insert\n2 for update\n3 for delete");
-		int inp = Integer.parseInt(scan.nextLine());
-		switch (inp) {
-		case 1:
-			System.out.println("Enter the id of the person");
-			int a = Integer.parseInt(scan.nextLine());
-			System.out.println("Enter name of the person");
-			String b = scan.nextLine();
-			System.out.println("Enter dept of the person");
-			String c = scan.nextLine();
-			dbr.insPerson(a, b, c);
-			break;
-		case 2:
-			System.out.println("Enter the id of the person");
-			int a1 = Integer.parseInt(scan.nextLine());
-			System.out.println("Enter name of the person");
-			String b1 = scan.nextLine();
-			System.out.println("Enter dept of the person");
-			String c1 = scan.nextLine();
-			dbr.upPerson(a1, b1, c1);
-			break;
-		case 3:
-			System.out.println("Enter the id of the person");
-			int a2 = Integer.parseInt(scan.nextLine());
-			dbr.delPerson(a2);
-			break;
-		default:
-			System.out.println("Unsupported operation");
-			break;
-		}
-	}
+    public static void crudOpsMenu(DbBeanARemote dbr) {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter \n1 for insert\n2 for update\n3 for delete");
+        int inp = Integer.parseInt(scan.nextLine());
+        switch (inp) {
+        case 1:
+            System.out.println("Enter the id of the person");
+            int a = Integer.parseInt(scan.nextLine());
+            System.out.println("Enter name of the person");
+            String b = scan.nextLine();
+            System.out.println("Enter dept of the person");
+            String c = scan.nextLine();
+            dbr.insPerson(a, b, c);
+            break;
+        case 2:
+            System.out.println("Enter the id of the person");
+            int a1 = Integer.parseInt(scan.nextLine());
+            System.out.println("Enter name of the person");
+            String b1 = scan.nextLine();
+            System.out.println("Enter dept of the person");
+            String c1 = scan.nextLine();
+            dbr.upPerson(a1, b1, c1);
+            break;
+        case 3:
+            System.out.println("Enter the id of the person");
+            int a2 = Integer.parseInt(scan.nextLine());
+            dbr.delPerson(a2);
+            break;
+        default:
+            System.out.println("Unsupported operation");
+            break;
+        }
+    }
 
-	private static class EJBContext {
-		private static DbBeanARemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
+    private static class EJBContext {
+        private static DbBeanARemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
 
-		private static DbBeanARemote retLookUp(String namespace) throws NamingException {
-			Context ctx = creaInitContext();
-			String appName = "";
-			String moduleName = "UnisysEighthProj";
-			String distinctName = "";
-			String beanName = DbBeanA.class.getSimpleName();
-			String viewClassName = DbBeanARemote.class.getName();
-			return (DbBeanARemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
-					+ beanName + "!" + viewClassName + "?stateful");
-		}
+        private static DbBeanARemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysEighthProj";
+            String distinctName = "";
+            String beanName = DbBeanA.class.getSimpleName();
+            String viewClassName = DbBeanARemote.class.getName();
+            return (DbBeanARemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
+                    + beanName + "!" + viewClassName + "?stateful");
+        }
 
-		private static Context creaInitContext() throws NamingException {
-			Properties props = new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
 
 }
 /////
@@ -4288,10 +4335,10 @@ import javax.ejb.Remote;
 
 @Remote
 public interface DbAccountBeanRemote {
-		public List<String> retRecs();
-		public String insAct(int a,String b,String c,String d);
-		public String upAct(int a,String b,String c,String d);
-		public String delAct(int a);
+        public List<String> retRecs();
+        public String insAct(int a,String b,String c,String d);
+        public String upAct(int a,String b,String c,String d);
+        public String delAct(int a);
 }
 
 ////
@@ -4312,83 +4359,83 @@ import javax.sql.DataSource;
 
 @Stateful
 public class DbAccountBean implements DbAccountBeanRemote {
-	DataSource ds = null;
-	Connection conn = null;
+    DataSource ds = null;
+    Connection conn = null;
 
-	public DbAccountBean() {
-		try {
-			ds = (DataSource) (new InitialContext().lookup("java:jboss/MySqlDS"));
-			conn = ds.getConnection();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+    public DbAccountBean() {
+        try {
+            ds = (DataSource) (new InitialContext().lookup("java:jboss/MySqlDS"));
+            conn = ds.getConnection();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Override
-	public List<String> retRecs() {
-		List<String> ls = new ArrayList<String>();
-		try {
-			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery("select * from bankaccount");
-			while (rs.next()) {
-				ls.add(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return ls;
-	}
+    @Override
+    public List<String> retRecs() {
+        List<String> ls = new ArrayList<String>();
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("select * from bankaccount");
+            while (rs.next()) {
+                ls.add(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ls;
+    }
 
-	@Override
-	public String insAct(int a, String b, String c, String d) {
-		String status = "Not Done";
-		try {
-			PreparedStatement ps = conn
-					.prepareStatement("insert into bankaccount values (" + a + ",'" + b + "','" + c + "','" + d + "')");
-			ps.execute();
-			status = "done";
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			System.out.println(status);
-		}
-		return status;
-	}
+    @Override
+    public String insAct(int a, String b, String c, String d) {
+        String status = "Not Done";
+        try {
+            PreparedStatement ps = conn
+                    .prepareStatement("insert into bankaccount values (" + a + ",'" + b + "','" + c + "','" + d + "')");
+            ps.execute();
+            status = "done";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println(status);
+        }
+        return status;
+    }
 
-	@Override
-	public String upAct(int a, String b, String c, String d) {
-		String status = "Not Done";
-		try {
-			PreparedStatement ps = conn
-					.prepareStatement("update bankaccount set aname='"+b+"',bname='"+c+"',loc='"+d+"' where acid="+a);
-			ps.executeUpdate();
-			status = "done";
-			System.out.println(status);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			System.out.println(status);
-		}
-		return status;
-	}
+    @Override
+    public String upAct(int a, String b, String c, String d) {
+        String status = "Not Done";
+        try {
+            PreparedStatement ps = conn
+                    .prepareStatement("update bankaccount set aname='"+b+"',bname='"+c+"',loc='"+d+"' where acid="+a);
+            ps.executeUpdate();
+            status = "done";
+            System.out.println(status);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println(status);
+        }
+        return status;
+    }
 
-	@Override
-	public String delAct(int a) {
-		String status = "Not Done";
-		try {
-			PreparedStatement ps = conn
-					.prepareStatement("delete from bankaccount where acid="+a);
-			ps.executeUpdate();
-			status = "done";
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			System.out.println(status);
-		}
-		return status;
-	}
+    @Override
+    public String delAct(int a) {
+        String status = "Not Done";
+        try {
+            PreparedStatement ps = conn
+                    .prepareStatement("delete from bankaccount where acid="+a);
+            ps.executeUpdate();
+            status = "done";
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println(status);
+        }
+        return status;
+    }
 }
 /////
 
@@ -4404,80 +4451,80 @@ import com.satdb.ser.DbAccountBean;
 import com.satdb.ser.DbAccountBeanRemote;
 
 public class MnClsClient {
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 DbAccountBeanRemote dr=EJBContext.retBean("ejb:");
-		System.out.println("Welcome to EJB table management systems for table bankaccount");
-		System.out.println("What do you want to do today \n1 for select \n2 for insert \n3 for update \n4 for delete");
-		Scanner scan=new Scanner(System.in);
-		int ch=Integer.parseInt(scan.nextLine());
-		if(ch==1) {
-			List<String> ls=dr.retRecs();
-			Iterator<String> itr=ls.iterator();
-			while(itr.hasNext()) {
-				System.out.println(itr.next());
-			}
-		}
-		else if(ch==2) {
-			System.out.println("Enter id of the account");
-			int ac=Integer.parseInt(scan.nextLine());
-			System.out.println("Enter name of the account holder");
-			String an=scan.nextLine();
-			System.out.println("Enter the name of the bank");
-			String bn=scan.nextLine();
-			System.out.println("Enter the loc");
-			String loc=scan.nextLine();
-			dr.insAct(ac, an, bn, loc);
-		}
-		else if(ch==3) {
-			System.out.println("Enter id of the account");
-			int ac=Integer.parseInt(scan.nextLine());
-			System.out.println("Enter name of the account holder");
-			String an=scan.nextLine();
-			System.out.println("Enter the name of the bank");
-			String bn=scan.nextLine();
-			System.out.println("Enter the loc");
-			String loc=scan.nextLine();
-			dr.upAct(ac, an, bn, loc);
-		}
-		else if(ch==4) {
-			System.out.println("Enter id of the account");
-			int ac=Integer.parseInt(scan.nextLine());
-			dr.delAct(ac);
-		}
-		else {
-			System.out.println("Not a valid choice");
-		}
+        System.out.println("Welcome to EJB table management systems for table bankaccount");
+        System.out.println("What do you want to do today \n1 for select \n2 for insert \n3 for update \n4 for delete");
+        Scanner scan=new Scanner(System.in);
+        int ch=Integer.parseInt(scan.nextLine());
+        if(ch==1) {
+            List<String> ls=dr.retRecs();
+            Iterator<String> itr=ls.iterator();
+            while(itr.hasNext()) {
+                System.out.println(itr.next());
+            }
+        }
+        else if(ch==2) {
+            System.out.println("Enter id of the account");
+            int ac=Integer.parseInt(scan.nextLine());
+            System.out.println("Enter name of the account holder");
+            String an=scan.nextLine();
+            System.out.println("Enter the name of the bank");
+            String bn=scan.nextLine();
+            System.out.println("Enter the loc");
+            String loc=scan.nextLine();
+            dr.insAct(ac, an, bn, loc);
+        }
+        else if(ch==3) {
+            System.out.println("Enter id of the account");
+            int ac=Integer.parseInt(scan.nextLine());
+            System.out.println("Enter name of the account holder");
+            String an=scan.nextLine();
+            System.out.println("Enter the name of the bank");
+            String bn=scan.nextLine();
+            System.out.println("Enter the loc");
+            String loc=scan.nextLine();
+            dr.upAct(ac, an, bn, loc);
+        }
+        else if(ch==4) {
+            System.out.println("Enter id of the account");
+            int ac=Integer.parseInt(scan.nextLine());
+            dr.delAct(ac);
+        }
+        else {
+            System.out.println("Not a valid choice");
+        }
 
 
 
-		
-	}
-	
-	private static class EJBContext{
-		private static DbAccountBeanRemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
+        
+    }
+    
+    private static class EJBContext{
+        private static DbAccountBeanRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
 
-		private static DbAccountBeanRemote retLookUp(String namespace) throws NamingException {
-			Context ctx = creaInitContext();
-			String appName = "";
-			String moduleName = "UnisysTenProj";
-			String distinctName = "";
-			String beanName = DbAccountBean.class.getSimpleName();
-			String viewClassName = DbAccountBeanRemote.class.getName();
-			return (DbAccountBeanRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
-					+ beanName + "!" + viewClassName + "?stateful");
-		}
+        private static DbAccountBeanRemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysTenProj";
+            String distinctName = "";
+            String beanName = DbAccountBean.class.getSimpleName();
+            String viewClassName = DbAccountBeanRemote.class.getName();
+            return (DbAccountBeanRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
+                    + beanName + "!" + viewClassName + "?stateful");
+        }
 
-		private static Context creaInitContext() throws NamingException {
-			Properties props = new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
 }
 //////
 package com.sat.timser;
@@ -4492,22 +4539,22 @@ import javax.ejb.Timer;
 
 @Stateless
 public class MyTimer implements MyTimerRemote {
-	@Resource
-	private SessionContext sessContext;
+    @Resource
+    private SessionContext sessContext;
     public MyTimer() {
     }
 
-	@Override
-	public void createTimerService(long duration) {
-		System.out.println("Activating timer at "+System.currentTimeMillis());
-		sessContext.getTimerService().createTimer(duration,"My Timer Started");
-	}
-	
-	@Timeout
-	public void handleTimeout(Timer t) {
-		System.out.println("Time out fired at "+System.currentTimeMillis());
-		t.cancel();
-	}
+    @Override
+    public void createTimerService(long duration) {
+        System.out.println("Activating timer at "+System.currentTimeMillis());
+        sessContext.getTimerService().createTimer(duration,"My Timer Started");
+    }
+    
+    @Timeout
+    public void handleTimeout(Timer t) {
+        System.out.println("Time out fired at "+System.currentTimeMillis());
+        t.cancel();
+    }
 
 }
 
@@ -4519,7 +4566,7 @@ import javax.ejb.Remote;
 
 @Remote
 public interface MyTimerRemote {
-	public void createTimerService(long duration);
+    public void createTimerService(long duration);
 }
 
 /////
@@ -4536,38 +4583,38 @@ import com.sat.timser.MyTimerRemote;
 
 public class ClientMain {
 
-	public static void main(String[] args) throws NamingException {
-		MyTimerRemote rem=EJBContext.retBean("ejb:");
-		rem.createTimerService(5000);
-		
-	}
-	
-	private static class EJBContext{
-		private static MyTimerRemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
+    public static void main(String[] args) throws NamingException {
+        MyTimerRemote rem=EJBContext.retBean("ejb:");
+        rem.createTimerService(5000);
+        
+    }
+    
+    private static class EJBContext{
+        private static MyTimerRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
 
-		private static MyTimerRemote retLookUp(String namespace) throws NamingException {
-			Context ctx = creaInitContext();
-			String appName = "";
-			String moduleName = "UnisysElevenProj";
-			String distinctName = "";
-			String beanName = MyTimer.class.getSimpleName();
-			String viewClassName = MyTimerRemote.class.getName();
-			return (MyTimerRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
-					+ beanName + "!" + viewClassName);
-		}
+        private static MyTimerRemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysElevenProj";
+            String distinctName = "";
+            String beanName = MyTimer.class.getSimpleName();
+            String viewClassName = MyTimerRemote.class.getName();
+            return (MyTimerRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
+                    + beanName + "!" + viewClassName);
+        }
 
-		private static Context creaInitContext() throws NamingException {
-			Properties props = new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
-	}
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
+    }
 
 
 //////
@@ -4577,7 +4624,7 @@ import javax.ejb.Remote;
 
 @Remote
 public interface ATimerRemote {
-	public void createATimer(long duration);
+    public void createATimer(long duration);
 }
 
 /////
@@ -4605,47 +4652,47 @@ public class ATimer implements ATimerRemote {
 
    @Resource
    private SessionContext sessContext;
-	
-	
-	
+    
+    
+    
     public ATimer() {
     }
     
 
-	@Override
-	public void createATimer(long duration) {
-		sessContext.getTimerService().createTimer(duration, "ATimer");
-	}
-	
-	@Timeout
-	public void handleTimeout(Timer timer ) {
-		System.out.println("Time out fired");
-		Date dt=new Date();
-		String jj=dt.getHours()+":"+dt.getMinutes()+":"+dt.getSeconds();
-		jj+="Our scheduled timer fired after so many millis";
-		FileOutputStream fos;
-		String k="unisyslog"+dt.getTime();
-		try {
-			fos = new FileOutputStream(new File("C:\\delhiofficefiles\\"+k));
-			fos.write(jj.getBytes());
-			fos.flush();
-			fos.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		timer.cancel();
-	}
+    @Override
+    public void createATimer(long duration) {
+        sessContext.getTimerService().createTimer(duration, "ATimer");
+    }
+    
+    @Timeout
+    public void handleTimeout(Timer timer ) {
+        System.out.println("Time out fired");
+        Date dt=new Date();
+        String jj=dt.getHours()+":"+dt.getMinutes()+":"+dt.getSeconds();
+        jj+="Our scheduled timer fired after so many millis";
+        FileOutputStream fos;
+        String k="unisyslog"+dt.getTime();
+        try {
+            fos = new FileOutputStream(new File("C:\\delhiofficefiles\\"+k));
+            fos.write(jj.getBytes());
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        timer.cancel();
+    }
 
 
-	@Override
-	public void timMeth() {
-		System.out.println("Method fired after a minute");
-	}
+    @Override
+    public void timMeth() {
+        System.out.println("Method fired after a minute");
+    }
 
 }
 /////
@@ -4656,9 +4703,9 @@ import javax.ejb.Schedule;
 
 @Remote
 public interface ATimerRemote {
-	public void createATimer(long duration);
-	@Schedule(minute  = "1")
-	public void timMeth();
+    public void createATimer(long duration);
+    @Schedule(minute  = "1")
+    public void timMeth();
 }
 ////
 package com.satejb.timser.cli;
@@ -4673,37 +4720,37 @@ import com.satejb.timser.ATimerRemote;
 
 public class MnClsClient {
 
-	public static void main(String[] args) throws NamingException {
-			ATimerRemote at=EJBContext.retBean("ejb:");
-			at.createATimer(5000);
-			at.timMeth();
-	}
+    public static void main(String[] args) throws NamingException {
+            ATimerRemote at=EJBContext.retBean("ejb:");
+            at.createATimer(5000);
+            at.timMeth();
+    }
 
-	private static class EJBContext{
-		private static ATimerRemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
+    private static class EJBContext{
+        private static ATimerRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
 
-		private static ATimerRemote retLookUp(String namespace) throws NamingException {
-			Context ctx = creaInitContext();
-			String appName = "";
-			String moduleName = "UnisysTwelveProj";
-			String distinctName = "";
-			String beanName = ATimer.class.getSimpleName();
-			String viewClassName = ATimerRemote.class.getName();
-			return (ATimerRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
-					+ beanName + "!" + viewClassName);
-		}
+        private static ATimerRemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysTwelveProj";
+            String distinctName = "";
+            String beanName = ATimer.class.getSimpleName();
+            String viewClassName = ATimerRemote.class.getName();
+            return (ATimerRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
+                    + beanName + "!" + viewClassName);
+        }
 
-		private static Context creaInitContext() throws NamingException {
-			Properties props = new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
 }
 
 /////
@@ -4737,64 +4784,64 @@ public class ATimer implements ATimerRemote {
 
    @Resource
    private SessionContext sessContext;
-	
-	
-	
+    
+    
+    
     public ATimer() {
     }
     
 
-	@Override
-	public void createATimer(long duration) {
-		sessContext.getTimerService().createTimer(duration, "ATimer");
-	}
-	
-	@Timeout
-	public void handleTimeout(Timer timer ) {
-		System.out.println("Time out fired");
-		Date dt=new Date();
-		String jj=dt.getHours()+":"+dt.getMinutes()+":"+dt.getSeconds();
-		jj+="Our scheduled timer fired after so many millis";
-		FileOutputStream fos;
-		String k="unisyslog"+dt.getTime();
-		try {
-			fos = new FileOutputStream(new File("C:\\delhiofficefiles\\"+k));
-			fos.write(jj.getBytes());
-			fos.flush();
-			fos.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		timer.cancel();
-	}
+    @Override
+    public void createATimer(long duration) {
+        sessContext.getTimerService().createTimer(duration, "ATimer");
+    }
+    
+    @Timeout
+    public void handleTimeout(Timer timer ) {
+        System.out.println("Time out fired");
+        Date dt=new Date();
+        String jj=dt.getHours()+":"+dt.getMinutes()+":"+dt.getSeconds();
+        jj+="Our scheduled timer fired after so many millis";
+        FileOutputStream fos;
+        String k="unisyslog"+dt.getTime();
+        try {
+            fos = new FileOutputStream(new File("C:\\delhiofficefiles\\"+k));
+            fos.write(jj.getBytes());
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        timer.cancel();
+    }
 
-	
+    
 
-	@Override
-	public void timMeth(int aa,String b,String c,String d) {
-		DataSource ds;
-		try {
-			ds = (DataSource)(new InitialContext().lookup("java:jboss/MySqlDS"));
-			Connection conn=ds.getConnection();
-			String query="insert into bankaccount values("+aa+",'"+b+"','"+c+"','"+d+"')";
-			PreparedStatement ps=conn.prepareStatement(query);
-			ps.execute();
-		} catch (NamingException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		
-		
+    @Override
+    public void timMeth(int aa,String b,String c,String d) {
+        DataSource ds;
+        try {
+            ds = (DataSource)(new InitialContext().lookup("java:jboss/MySqlDS"));
+            Connection conn=ds.getConnection();
+            String query="insert into bankaccount values("+aa+",'"+b+"','"+c+"','"+d+"')";
+            PreparedStatement ps=conn.prepareStatement(query);
+            ps.execute();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        
+        
+        
 //		System.out.println("Method fired after a minute");
-	}
+    }
 
 }
 /////
@@ -4805,17 +4852,20 @@ import javax.ejb.Schedule;
 
 @Remote
 public interface ATimerRemote {
-	public void createATimer(long duration);
-	@Schedule(second =    "10")
-	public void timMeth(int aa,String b,String c,String d);
+    public void createATimer(long duration);
+    @Schedule(second =    "10")
+    public void timMeth(int aa,String b,String c,String d);
 }
 ////
 ATimerRemote at=EJBContext.retBean("ejb:");
-			at.createATimer(5000);
+            at.createATimer(5000);
 //			at.timMeth();
-			at.timMeth( 12, "zuakowski", "Bank Of Maryland","Washington");
-////////
-Persistence.xml
+            at.timMeth( 12, "zuakowski", "Bank Of Maryland","Washington");
+---
+
+* `Persistence.xml`
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0"
    xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -4832,7 +4882,7 @@ Persistence.xml
       </properties>
    </persistence-unit>
 </persistence>
-/////
+```
 
 package com.sat.mods;
 
@@ -4843,35 +4893,35 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "bankaccount")
 public class BankAccount  implements Serializable{
-	private int acid;
-	@Id
-	public int getAcid() {
-		return acid;
-	}
-	public void setAcid(int acid) {
-		this.acid = acid;
-	}
-	public String getAname() {
-		return aname;
-	}
-	public void setAname(String aname) {
-		this.aname = aname;
-	}
-	public String getBname() {
-		return bname;
-	}
-	public void setBname(String bname) {
-		this.bname = bname;
-	}
-	public String getLoc() {
-		return loc;
-	}
-	public void setLoc(String loc) {
-		this.loc = loc;
-	}
-	private String aname;
-	private String bname;
-	private String loc;
+    private int acid;
+    @Id
+    public int getAcid() {
+        return acid;
+    }
+    public void setAcid(int acid) {
+        this.acid = acid;
+    }
+    public String getAname() {
+        return aname;
+    }
+    public void setAname(String aname) {
+        this.aname = aname;
+    }
+    public String getBname() {
+        return bname;
+    }
+    public void setBname(String bname) {
+        this.bname = bname;
+    }
+    public String getLoc() {
+        return loc;
+    }
+    public void setLoc(String loc) {
+        this.loc = loc;
+    }
+    private String aname;
+    private String bname;
+    private String loc;
 }
 /////
 
@@ -4885,7 +4935,7 @@ import com.sat.mods.BankAccount;
 
 @Remote
 public interface BankAccountPersistentBeanRemote {
-		public List<BankAccount> retList();
+        public List<BankAccount> retList();
 }
 /////
 package com.sat.cls;
@@ -4911,12 +4961,12 @@ public class BankAccountPersistentBean implements BankAccountPersistentBeanRemot
     @PersistenceContext(name = "primary")
     private EntityManager entityManager; 
     
-	@Override
-	public List<BankAccount> retList() {
-		List<BankAccount> lb=null;
-		lb=(List<BankAccount>)entityManager.createQuery("From BankAccount").getResultList();
-		return lb;
-	}
+    @Override
+    public List<BankAccount> retList() {
+        List<BankAccount> lb=null;
+        lb=(List<BankAccount>)entityManager.createQuery("From BankAccount").getResultList();
+        return lb;
+    }
 
 }
 ////
@@ -4935,46 +4985,46 @@ import com.sat.mods.BankAccount;
 
 public class MnClsClient {
 
-	public static void main(String[] args) throws NamingException {
-		BankAccountPersistentBeanRemote br=EJBContext.retBean("ejb:");
-		List<BankAccount> lb=br.retList();
-		for(BankAccount b:lb) {
-			System.out.println(b.getAcid()+" "+b.getAname()+" "+b.getBname()+" "+b.getLoc());
-		}
-	}
+    public static void main(String[] args) throws NamingException {
+        BankAccountPersistentBeanRemote br=EJBContext.retBean("ejb:");
+        List<BankAccount> lb=br.retList();
+        for(BankAccount b:lb) {
+            System.out.println(b.getAcid()+" "+b.getAname()+" "+b.getBname()+" "+b.getLoc());
+        }
+    }
 
-	private static class EJBContext{
-		private static BankAccountPersistentBeanRemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
+    private static class EJBContext{
+        private static BankAccountPersistentBeanRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
 
-		private static BankAccountPersistentBeanRemote retLookUp(String namespace) throws NamingException {
-			Context ctx = creaInitContext();
-			String appName = "";
-			String moduleName = "UnisysThirteenProj";
-			String distinctName = "";
-			String beanName = BankAccountPersistentBean.class.getSimpleName();
-			String viewClassName = BankAccountPersistentBeanRemote.class.getName();
-			return (BankAccountPersistentBeanRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
-					+ beanName + "!" + viewClassName);
-		}
+        private static BankAccountPersistentBeanRemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysThirteenProj";
+            String distinctName = "";
+            String beanName = BankAccountPersistentBean.class.getSimpleName();
+            String viewClassName = BankAccountPersistentBeanRemote.class.getName();
+            return (BankAccountPersistentBeanRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
+                    + beanName + "!" + viewClassName);
+        }
 
-		private static Context creaInitContext() throws NamingException {
-			Properties props = new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
-	
-	
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
+    
+    
 }
 ////
-	public void addAccount(BankAccount b);
-	public void upAccount(BankAccount b);
-	public void delAccount(BankAccount b);
+    public void addAccount(BankAccount b);
+    public void upAccount(BankAccount b);
+    public void delAccount(BankAccount b);
 ////
 package c.b.a;
 
@@ -4991,58 +5041,58 @@ import com.sat.mods.BankAccount;
 
 public class MnClsClient {
 
-	public static void main(String[] args) throws NamingException {
-		BankAccountPersistentBeanRemote br=EJBContext.retBean("ejb:");
-		int a=13;
-		String b="Melinda Tsariski";
-		String c="Royal Bank  Of Ireland";
-		String d="new street, Dublin";
-		BankAccount ba=new BankAccount();
-		ba.setAcid(a);
-		ba.setAname(b);
-		ba.setBname(c);
-		ba.setLoc(d);
+    public static void main(String[] args) throws NamingException {
+        BankAccountPersistentBeanRemote br=EJBContext.retBean("ejb:");
+        int a=13;
+        String b="Melinda Tsariski";
+        String c="Royal Bank  Of Ireland";
+        String d="new street, Dublin";
+        BankAccount ba=new BankAccount();
+        ba.setAcid(a);
+        ba.setAname(b);
+        ba.setBname(c);
+        ba.setLoc(d);
 //		br.addAccount(ba);
 //		br.upAccount(ba);
-		br.delAccount(ba);
-	}
+        br.delAccount(ba);
+    }
 
-	public static void selMeth(BankAccountPersistentBeanRemote br) {
-		List<BankAccount> lb=br.retList();
-		for(BankAccount b:lb) {
-			System.out.println(b.getAcid()+" "+b.getAname()+" "+b.getBname()+" "+b.getLoc());
-		}
-	}
+    public static void selMeth(BankAccountPersistentBeanRemote br) {
+        List<BankAccount> lb=br.retList();
+        for(BankAccount b:lb) {
+            System.out.println(b.getAcid()+" "+b.getAname()+" "+b.getBname()+" "+b.getLoc());
+        }
+    }
 
-	private static class EJBContext{
-		private static BankAccountPersistentBeanRemote retBean(String namespace) throws NamingException {
-			return retLookUp(namespace);
-		}
+    private static class EJBContext{
+        private static BankAccountPersistentBeanRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
 
-		private static BankAccountPersistentBeanRemote retLookUp(String namespace) throws NamingException {
-			Context ctx = creaInitContext();
-			String appName = "";
-			String moduleName = "UnisysThirteenProj";
-			String distinctName = "";
-			String beanName = BankAccountPersistentBean.class.getSimpleName();
-			String viewClassName = BankAccountPersistentBeanRemote.class.getName();
-			return (BankAccountPersistentBeanRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
-					+ beanName + "!" + viewClassName);
-		}
+        private static BankAccountPersistentBeanRemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysThirteenProj";
+            String distinctName = "";
+            String beanName = BankAccountPersistentBean.class.getSimpleName();
+            String viewClassName = BankAccountPersistentBeanRemote.class.getName();
+            return (BankAccountPersistentBeanRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
+                    + beanName + "!" + viewClassName);
+        }
 
-		private static Context creaInitContext() throws NamingException {
-			Properties props = new Properties();
-			props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
-			props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-			props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
-			props.put("jboss.naming.client.ejb.context", true);
-			return new InitialContext(props);
-		}
-	}
-	
-	
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
+    
+    
 }
-//////
+//////17/05/2024///////
 package com.sat.cls;
 
 import java.util.List;
@@ -5066,27 +5116,813 @@ public class BankAccountPersistentBean implements BankAccountPersistentBeanRemot
     @PersistenceContext(name = "primary")
     private EntityManager entityManager; 
     
-	@Override
-	public List<BankAccount> retList() {
-		List<BankAccount> lb=null;
-		lb=(List<BankAccount>)entityManager.createQuery("From BankAccount").getResultList();
-		return lb;
-	}
+    @Override
+    public List<BankAccount> retList() {
+        List<BankAccount> lb=null;
+        lb=(List<BankAccount>)entityManager.createQuery("From BankAccount").getResultList();
+        return lb;
+    }
 
-	@Override
-	public void addAccount(BankAccount b) {
-		entityManager.persist(b);
-	}
+    @Override
+    public void addAccount(BankAccount b) {
+        entityManager.persist(b);
+    }
 
-	@Override
-	public void upAccount(BankAccount b) {
-		entityManager.merge(b);
-	}
+    @Override
+    public void upAccount(BankAccount b) {
+        entityManager.merge(b);
+    }
 
-	@Override
-	public void delAccount(BankAccount b) {
-		BankAccount ba=entityManager.find(BankAccount.class, b.getAcid());
-		entityManager.remove(ba);
-	}
+    @Override
+    public void delAccount(BankAccount b) {
+        BankAccount ba=entityManager.find(BankAccount.class, b.getAcid());
+        entityManager.remove(ba);
+    }
 }
 /////
+https://www.ironjacamar.org/
+//////
+
+create table bookshelf(id int primary key,bname varchar(50),bauth varchar(50),bpubs varchar(50));
+/////
+ insert into bookshelf values(10,'Leelavati Ganitam','Bhaskaracharya','Benarsidas press');
+//////
+package co.sa.mods;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "bookshelf")
+public class BookShelfEntityBean implements Serializable {
+    private int id;
+    private String bname;
+    private String bauth;
+    private String bpubs;
+    @Id
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getBname() {
+        return bname;
+    }
+    public void setBname(String bname) {
+        this.bname = bname;
+    }
+    public String getBauth() {
+        return bauth;
+    }
+    public void setBauth(String bauth) {
+        this.bauth = bauth;
+    }
+    public String getBpubs() {
+        return bpubs;
+    }
+    public void setBpubs(String bpubs) {
+        this.bpubs = bpubs;
+    } 
+}
+
+/////
+package co.saejb.bns;
+
+import java.util.List;
+
+import javax.ejb.Remote;
+
+import co.sa.mods.BookShelfEntityBean;
+
+@Remote
+public interface BookShelfBeanRemote {
+    public List<BookShelfEntityBean> retBList();
+    public void addBook(BookShelfEntityBean book);
+    public void upBook(BookShelfEntityBean book);
+    public void delBook(BookShelfEntityBean book);
+}
+/////////////
+package co.sa.mods;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "bookshelf")
+public class BookShelfEntityBean {
+    private int id;
+    private String bname;
+    private String bauth;
+    private String bpubs;
+    @Id
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getBname() {
+        return bname;
+    }
+    public void setBname(String bname) {
+        this.bname = bname;
+    }
+    public String getBauth() {
+        return bauth;
+    }
+    public void setBauth(String bauth) {
+        this.bauth = bauth;
+    }
+    public String getBpubs() {
+        return bpubs;
+    }
+    public void setBpubs(String bpubs) {
+        this.bpubs = bpubs;
+    } 
+}
+//////
+package co.saejb.bns;
+
+import java.util.List;
+
+import javax.ejb.LocalBean;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import co.sa.mods.BookShelfEntityBean;
+
+
+@Stateless
+@Remote
+public class BookShelfBean implements BookShelfBeanRemote {
+
+    @PersistenceContext(unitName = "UnisysFourteenProj.jar#secondary")
+    private EntityManager entityManager;
+    
+    public BookShelfBean() {
+    }
+
+    @Override
+    public List<BookShelfEntityBean> retBList() {
+        List<BookShelfEntityBean> ls=null;
+        ls=(List<BookShelfEntityBean>)entityManager.createQuery("From BookShelfEntityBean").getResultList();
+        return ls;
+    }
+
+    @Override
+    public void addBook(BookShelfEntityBean book) {
+        entityManager.persist(book);
+    }
+
+    @Override
+    public void upBook(BookShelfEntityBean book) {
+        entityManager.merge(book);
+    }
+
+    @Override
+    public void delBook(BookShelfEntityBean book) {
+        BookShelfEntityBean bsb=entityManager.find(BookShelfEntityBean.class, book.getId());
+        entityManager.remove(bsb);
+    }
+}
+/////
+package com.sa.cli;
+
+import java.util.List;
+import java.util.Properties;
+import java.util.Scanner;
+import java.util.function.Consumer;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import co.sa.mods.BookShelfEntityBean;
+import co.saejb.bns.BookShelfBean;
+import co.saejb.bns.BookShelfBeanRemote;
+
+public class MnClsA {
+    
+    private static void drawLine() {
+        System.out.println("******************************************************************************");
+    }
+    
+    
+    public static void main(String[] args) throws NamingException {
+        BookShelfBeanRemote br=EJBContext.retBean("ejb:");
+        String ch="y";
+        Scanner scan=new Scanner(System.in);
+        int size=br.retBList().size();
+        while(ch.equals("y")) {
+            BookShelfEntityBean bean=new BookShelfEntityBean();
+            size++;
+            System.out.println("Enter the name of book");
+            String bname=scan.nextLine();
+            System.out.println("Enter the author of book");
+            String bauth=scan.nextLine();
+            System.out.println("Enter the publisher of book");
+            String bpubs=scan.nextLine();
+            bean.setId(size);
+            bean.setBname(bname);
+            bean.setBauth(bauth);
+            bean.setBpubs(bpubs);
+            br.addBook(bean);
+//			br.upBook(bean);
+            System.out.println("Enter y to continue entering books");
+            ch=scan.nextLine();
+        }
+        
+        
+        
+    }
+
+
+    public static void selQuery(BookShelfBeanRemote br) {
+        List<BookShelfEntityBean> lb=br.retBList();
+        lb.stream().forEach(new Consumer<BookShelfEntityBean>() {
+            @Override
+            public void accept(BookShelfEntityBean t) {
+                String fin=String.format("Book No:%d\n\t\tBook Id:%d\n\t\tBook Name:%s\n\t\tBook Author:%s\n\t\tBook Publisher:%s", t.getId(),t.getId(),t.getBname(),t.getBauth(),t.getBpubs());
+                System.out.println(fin);
+                drawLine();
+            }
+        });
+    }
+    
+    private static class EJBContext{
+        private static BookShelfBeanRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
+
+        private static BookShelfBeanRemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysFourteenProj";
+            String distinctName = "";
+            String beanName = BookShelfBean.class.getSimpleName();
+            String viewClassName = BookShelfBeanRemote.class.getName();
+            return (BookShelfBeanRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
+                    + beanName + "!" + viewClassName);
+        }
+
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
+}
+//////
+package com.sa.cli;
+
+import java.util.List;
+import java.util.Properties;
+import java.util.Scanner;
+import java.util.function.Consumer;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import co.sa.mods.BookShelfEntityBean;
+import co.saejb.bns.BookShelfBean;
+import co.saejb.bns.BookShelfBeanRemote;
+
+public class MnClsA {
+
+    private static void drawLine() {
+        System.out.println("******************************************************************************");
+    }
+    
+    public static void main(String[] args) throws NamingException {
+        BookShelfBeanRemote br=EJBContext.retBean("ejb:");
+        String ch="y";
+        Scanner scan=new Scanner(System.in);
+        System.out.println("Enter the id of the up date");
+        int id=Integer.parseInt(scan.nextLine());
+        System.out.println("Enter the new name of the book");
+        String name=scan.nextLine();
+        System.out.println("Enter the new author of the book");
+        String auth=scan.nextLine();
+        System.out.println("Enter the new publisher of the book");
+        String pubs=scan.nextLine();
+        BookShelfEntityBean eb=new BookShelfEntityBean();
+        eb.setId(id);
+        eb.setBname(name);
+        eb.setBauth(auth);
+        eb.setBpubs(pubs);
+        br.upBook(eb);
+    
+    }
+
+    public static void insQuery(BookShelfBeanRemote br, String ch, Scanner scan) {
+        int size=br.retBList().size();
+        while(ch.equals("y")) {
+            BookShelfEntityBean bean=new BookShelfEntityBean();
+            size++;
+            System.out.println("Enter the name of book");
+            String bname=scan.nextLine();
+            System.out.println("Enter the author of book");
+            String bauth=scan.nextLine();
+            System.out.println("Enter the publisher of book");
+            String bpubs=scan.nextLine();
+            bean.setId(size);
+            bean.setBname(bname);
+            bean.setBauth(bauth);
+            bean.setBpubs(bpubs);
+            br.addBook(bean);
+//			br.upBook(bean);
+            System.out.println("Enter y to continue entering books");
+            ch=scan.nextLine();
+        }
+    }
+
+
+    public static void selQuery(BookShelfBeanRemote br) {
+        List<BookShelfEntityBean> lb=br.retBList();
+        lb.stream().forEach(new Consumer<BookShelfEntityBean>() {
+            @Override
+            public void accept(BookShelfEntityBean t) {
+                String fin=String.format("Book No:%d\n\t\tBook Id:%d\n\t\tBook Name:%s\n\t\tBook Author:%s\n\t\tBook Publisher:%s", t.getId(),t.getId(),t.getBname(),t.getBauth(),t.getBpubs());
+                System.out.println(fin);
+                drawLine();
+            }
+        });
+    }
+    
+    private static class EJBContext{
+        private static BookShelfBeanRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
+
+        private static BookShelfBeanRemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysFourteenProj";
+            String distinctName = "";
+            String beanName = BookShelfBean.class.getSimpleName();
+            String viewClassName = BookShelfBeanRemote.class.getName();
+            return (BookShelfBeanRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
+                    + beanName + "!" + viewClassName);
+        }
+
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
+    
+
+}
+////////////
+package com.sa.cli;
+
+import java.util.List;
+import java.util.Properties;
+import java.util.Scanner;
+import java.util.function.Consumer;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import co.sa.mods.BookShelfEntityBean;
+import co.saejb.bns.BookShelfBean;
+import co.saejb.bns.BookShelfBeanRemote;
+
+public class MnClsA {
+
+    private static void drawLine() {
+        System.out.println("******************************************************************************");
+    }
+    
+    public static void main(String[] args) throws NamingException {
+        BookShelfBeanRemote br=EJBContext.retBean("ejb:");
+        String ch="y";
+        Scanner scan=new Scanner(System.in);
+        System.out.println("Enter the id of the delete");
+        int id=Integer.parseInt(scan.nextLine());
+        System.out.println("Enter the new name of the book");
+        String name=scan.nextLine();
+        System.out.println("Enter the new author of the book");
+        String auth=scan.nextLine();
+        System.out.println("Enter the new publisher of the book");
+        String pubs=scan.nextLine();
+        BookShelfEntityBean eb=new BookShelfEntityBean();
+        eb.setId(id);
+        eb.setBname(name);
+        eb.setBauth(auth);
+        eb.setBpubs(pubs);
+        br.delBook(eb);
+    
+    }
+
+    public static void upQuery(BookShelfBeanRemote br, Scanner scan) {
+        System.out.println("Enter the id of the up date");
+        int id=Integer.parseInt(scan.nextLine());
+        System.out.println("Enter the new name of the book");
+        String name=scan.nextLine();
+        System.out.println("Enter the new author of the book");
+        String auth=scan.nextLine();
+        System.out.println("Enter the new publisher of the book");
+        String pubs=scan.nextLine();
+        BookShelfEntityBean eb=new BookShelfEntityBean();
+        eb.setId(id);
+        eb.setBname(name);
+        eb.setBauth(auth);
+        eb.setBpubs(pubs);
+        br.upBook(eb);
+    }
+
+    public static void insQuery(BookShelfBeanRemote br, String ch, Scanner scan) {
+        int size=br.retBList().size();
+        while(ch.equals("y")) {
+            BookShelfEntityBean bean=new BookShelfEntityBean();
+            size++;
+            System.out.println("Enter the name of book");
+            String bname=scan.nextLine();
+            System.out.println("Enter the author of book");
+            String bauth=scan.nextLine();
+            System.out.println("Enter the publisher of book");
+            String bpubs=scan.nextLine();
+            bean.setId(size);
+            bean.setBname(bname);
+            bean.setBauth(bauth);
+            bean.setBpubs(bpubs);
+            br.addBook(bean);
+//			br.upBook(bean);
+            System.out.println("Enter y to continue entering books");
+            ch=scan.nextLine();
+        }
+    }
+
+
+    public static void selQuery(BookShelfBeanRemote br) {
+        List<BookShelfEntityBean> lb=br.retBList();
+        lb.stream().forEach(new Consumer<BookShelfEntityBean>() {
+            @Override
+            public void accept(BookShelfEntityBean t) {
+                String fin=String.format("Book No:%d\n\t\tBook Id:%d\n\t\tBook Name:%s\n\t\tBook Author:%s\n\t\tBook Publisher:%s", t.getId(),t.getId(),t.getBname(),t.getBauth(),t.getBpubs());
+                System.out.println(fin);
+                drawLine();
+            }
+        });
+    }
+    
+    private static class EJBContext{
+        private static BookShelfBeanRemote retBean(String namespace) throws NamingException {
+            return retLookUp(namespace);
+        }
+
+        private static BookShelfBeanRemote retLookUp(String namespace) throws NamingException {
+            Context ctx = creaInitContext();
+            String appName = "";
+            String moduleName = "UnisysFourteenProj";
+            String distinctName = "";
+            String beanName = BookShelfBean.class.getSimpleName();
+            String viewClassName = BookShelfBeanRemote.class.getName();
+            return (BookShelfBeanRemote) ctx.lookup(namespace + appName + "/" + moduleName + "/" + distinctName + "/"
+                    + beanName + "!" + viewClassName);
+        }
+
+        private static Context creaInitContext() throws NamingException {
+            Properties props = new Properties();
+            props.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+            props.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+            props.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+            props.put("jboss.naming.client.ejb.context", true);
+            return new InitialContext(props);
+        }
+    }
+    
+
+}
+////////////////
+package co.saejb.bns;
+
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostRemove;
+import javax.persistence.PostUpdate;
+import javax.persistence.PrePersist;
+
+import co.sa.mods.BookShelfEntityBean;
+
+public class BeanCallbackListener {
+    @PrePersist
+    public void prePersist(BookShelfEntityBean b) {
+        System.out.println("*******The bean prepersist called on bean "+b.getClass().getSimpleName());
+    }
+    
+    @PostPersist
+    public void postPersist(BookShelfEntityBean b) {
+        System.out.println("^^^^^^^^^The bean postpersist called on bean "+b.getClass().getSimpleName());
+    }
+    
+    @PostRemove
+    public void poRemove(BookShelfEntityBean b) {
+        System.out.println("#########The bean post remove called on bean "+b.getClass().getSimpleName());
+    }
+    
+    @PostUpdate
+    public void postUpdate(BookShelfEntityBean b) {
+        System.out.println("@@@@@@@@@The bean post update called on bean "+b.getClass().getSimpleName());
+    }
+    
+    @PostLoad
+    public void postLoad(BookShelfEntityBean b) {
+        System.out.println("********!!The bean postload called on bean "+b.getClass().getSimpleName());
+    }
+}
+
+//////////
+/subsystem=security/security-domain=other/authentication=classic/login-module=RealmDirect:map-put(name=module-options,key=unauthenticatedIdentity,value=guest)
+
+username:jmsuser
+password:jmsuser@123
+role:guest
+
+
+////
+jms-queue add --queue-address=jQueue --entries=[queue/jQueue jms/queue/jQueue java:jboss/exported/jms/queue/jQueue]
+/////
+package com.sat.msg;
+
+import javax.ejb.ActivationConfigProperty;
+import javax.ejb.MessageDriven;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.TextMessage;
+
+/**
+ * Message-Driven Bean implementation class for: MyMDBean
+ */
+@MessageDriven(
+        activationConfig = { @ActivationConfigProperty(
+                propertyName = "destination", propertyValue = "pQueue"), @ActivationConfigProperty(
+                propertyName = "destinationType", propertyValue = "javax.jms.Queue")
+        }, 
+        mappedName = "pQueue")
+public class MyMDBean implements MessageListener {
+
+    
+    public MyMDBean() {
+    }
+    
+    /**
+     * @see MessageListener#onMessage(Message)
+     */
+    public void onMessage(Message message) {
+        TextMessage tm=(TextMessage)message;
+        try {
+            System.out.println(tm.getText());
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+//////
+public static Context creaContext() throws NamingException {
+        Properties jndiProperties = new Properties();
+        jndiProperties.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+        jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+        jndiProperties.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+        jndiProperties.put(Context.SECURITY_PRINCIPAL, "admin");
+        jndiProperties.put(Context.SECURITY_CREDENTIALS, "Satish@123");
+        return new InitialContext(jndiProperties);
+    }
+/////
+package com.sa.cli;
+
+import java.util.Properties;
+
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSException;
+import javax.jms.MessageProducer;
+import javax.jms.Queue;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+public class ClientMDB {
+
+    public static void main(String[] args) throws NamingException, JMSException {
+        Context ic=creaContext();
+        ConnectionFactory cf=(ConnectionFactory)ic.lookup("java:jms/RemoteConnectionFactory");
+        Queue queue=(Queue)ic.lookup("jms/queue/pQueue");
+        Connection connection=cf.createConnection();
+        Session session=connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
+        MessageProducer publisher=session.createProducer(queue);
+        connection.start();
+        String jj="^^^^^^Iam being sent to the server";
+        TextMessage tm=session.createTextMessage(jj);
+        publisher.send(tm);
+        
+    }
+    
+    
+    public static Context creaContext() throws NamingException {
+        Properties jndiProperties = new Properties();
+        jndiProperties.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+        jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+        jndiProperties.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+        jndiProperties.put(Context.SECURITY_PRINCIPAL, "admin");
+        jndiProperties.put(Context.SECURITY_CREDENTIALS, "Satish@123");
+        return new InitialContext(jndiProperties);
+    }
+
+}
+/////
+satish=Application,guest
+satish=a3824b88b633fb42f558eace45a31ef4
+satish=Management
+admin=791fad3e611762f52077a971a2117410
+satish=37627a0cc7276668c89d3d272bf9dac7
+
+////
+Exception in thread "main" javax.jms.JMSSecurityException: AMQ119032: User: null does not have permission='SEND' on address jms.queue.pQueue
+    at org.apache.activemq.artemis.core.protocol.core.impl.ChannelImpl.sendBlocking(ChannelImpl.java:404)
+    at org.apache.activemq.artemis.core.protocol.core.impl.ChannelImpl.sendBlocking(ChannelImpl.java:315)
+    at org.apache.activemq.artemis.core.protocol.core.impl.ActiveMQSessionContext.sendFullMessage(ActiveMQSessionContext.java:418)
+    at org.apache.activemq.artemis.core.client.impl.ClientProducerImpl.sendRegularMessage(ClientProducerImpl.java:287)
+    at org.apache.activemq.artemis.core.client.impl.ClientProducerImpl.doSend(ClientProducerImpl.java:263)
+    at org.apache.activemq.artemis.core.client.impl.ClientProducerImpl.send(ClientProducerImpl.java:126)
+    at org.apache.activemq.artemis.jms.client.ActiveMQMessageProducer.doSendx(ActiveMQMessageProducer.java:491)
+    at org.apache.activemq.artemis.jms.client.ActiveMQMessageProducer.send(ActiveMQMessageProducer.java:189)
+    at com.sa.cli.ClientMDB.main(ClientMDB.java:28)
+Caused by: ActiveMQSecurityException[errorType=SECURITY_EXCEPTION message=AMQ119032: User: null does not have permission='SEND' on address jms.queue.pQueue]
+    ... 9 more
+////////////
+allowed-users="*" 
+
+/subsystem=ee:write-attribute(name=annotation-property-replacement,value=true)
+
+/subsystem=security/security-domain=other/authentication=classic/login-module=RealmDirect:map-put(name=module-options,key=unauthenticatedIdentity,value=guest)
+
+
+subsystem xmlns="urn:jboss:domain:messaging-activemq:1.0"
+
+http://localhost:9990/console/App.html#rbac
+
+
+
+
+
+//////
+ InitialContext ic = new InitialContext();
+      Queue queue = (Queue)ic.lookup(queueName);
+      ic.close();
+
+      Session session = null;
+      Connection conn = null;
+
+       try
+      {
+         conn = getConnection();
+         session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
+         MessageProducer producer = session.createProducer(queue);
+
+         TextMessage tm = session.createTextMessage(txt);
+
+         producer.send(tm);
+         System.out.println("message " + txt + " sent to " + queueName);
+
+      }
+      finally
+      {
+         closeConnection(conn);
+      }
+
+
+
+/////
+ public void send(String txt, String queueName) throws Exception
+   {
+      InitialContext ic = new InitialContext();
+      Queue queue = (Queue)ic.lookup(queueName);
+      ic.close();
+
+      Session session = null;
+      Connection conn = null;
+
+       try
+      {
+         conn = getConnection();
+         session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
+         MessageProducer producer = session.createProducer(queue);
+
+         TextMessage tm = session.createTextMessage(txt);
+
+         producer.send(tm);
+         System.out.println("message " + txt + " sent to " + queueName);
+
+      }
+      finally
+      {
+         closeConnection(conn);
+      }
+   }
+
+/////
+ public Connection getConnection() throws Exception {
+
+        Connection connection = null;
+
+        try {
+            connection = cf.createConnection();
+            connection.start();
+
+        }catch(Exception e ){
+           if(connection != null)
+               closeConnection(connection);
+           System.out.println("Failed to get connection...exception is " +e);
+           throw e;
+        }
+
+        return connection;
+    }
+/////
+  private ConnectionFactory cf = null;
+
+
+(ConnectionFactory)ic.lookup("java:jms/RemoteConnectionFactory");
+
+
+New-NetFirewallRule -DisplayName "Allow HTTP Remoting" -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow
+package com.sa.cli;
+
+import java.util.Properties;
+
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSException;
+import javax.jms.MessageProducer;
+import javax.jms.Queue;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+public class ClientMDB {
+    public static void main(String[] args) throws NamingException, JMSException {
+        Context ic=creaContext();
+        ConnectionFactory cf=(ConnectionFactory)ic.lookup("java:jms/RemoteConnectionFactory");
+        Queue queue=(Queue)ic.lookup("jms/queue/pQueue");
+        Connection connection=cf.createConnection();
+        Session session=connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
+        MessageProducer publisher=session.createProducer(queue);
+        connection.start();
+        String jj="^^^^^^A new message from client";
+        TextMessage tm=session.createTextMessage(jj);
+        publisher.send(tm);
+    }
+    
+    public static Context creaContext() throws NamingException {
+        Properties jndiProperties = new Properties();
+        jndiProperties.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+        jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+        jndiProperties.put(Context.PROVIDER_URL, "http-remoting://localhost:8080");
+        jndiProperties.put(Context.SECURITY_PRINCIPAL, "laxmi");
+        jndiProperties.put(Context.SECURITY_CREDENTIALS, "laxmi@123");
+        return new InitialContext(jndiProperties);
+    }
+}
+
+
+/////////////
+ public MyMDBean() {
+    }
+    
+    /**
+     * @see MessageListener#onMessage(Message)
+     */
+    public void onMessage(Message message) {
+        TextMessage tm=(TextMessage)message;
+        try {
+            System.out.println(tm.getText());
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+    }
